@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
-import { Compass, Calendar, Activity, BrainCircuit, ShieldAlert, Shield, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Compass, Calendar, Activity, BrainCircuit, ShieldAlert, Shield, Menu, X, ArrowUpRight, Gauge } from 'lucide-react';
 
-// Import Pages
 import JourneyCompanion from './pages/JourneyCompanion';
 import Itinerary from './pages/Itinerary';
 import DigitalTwin from './pages/DigitalTwin';
 import AgentPanel from './pages/AgentPanel';
+import VehicleIntelligence from './pages/VehicleIntelligence';
 
 import './App.css';
 
@@ -41,7 +41,8 @@ const DashboardLayout = ({ children }) => {
     { name: 'Journey Companion', path: '/journey', icon: Compass },
     { name: 'Itinerary Planner', path: '/itinerary', icon: Calendar },
     { name: 'Digital Twin Studio', path: '/digital-twin', icon: Activity },
-    { name: 'AI Agent Panel', path: '/agents', icon: BrainCircuit }
+    { name: 'AI Agent Panel', path: '/agents', icon: BrainCircuit },
+    { name: 'Vehicle Intelligence', path: '/vehicle-intelligence', icon: Gauge }
   ];
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -211,6 +212,7 @@ const App = () => {
           <Route path="/itinerary" element={<Itinerary />} />
           <Route path="/digital-twin" element={<DigitalTwin />} />
           <Route path="/agents" element={<AgentPanel />} />
+          <Route path="/vehicle-intelligence" element={<VehicleIntelligence />} />
           <Route path="/" element={<Navigate to="/journey" replace />} />
           <Route path="*" element={<Navigate to="/journey" replace />} />
         </Routes>

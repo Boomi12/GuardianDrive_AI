@@ -113,4 +113,45 @@ export const getAgentRecommendations = async (tripId) => {
   }
 };
 
+// Vehicle Intelligence API calls
+export const calculateVehicleRange = async (vehicleData) => {
+  try {
+    const response = await api.post('/vehicle/calculate-range', vehicleData);
+    return response.data;
+  } catch (error) {
+    console.error('Error calculating vehicle range:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getEVBatteryHealth = async (healthData) => {
+  try {
+    const response = await api.post('/vehicle/battery-health', healthData);
+    return response.data;
+  } catch (error) {
+    console.error('Error predicting battery health:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getMileageAnalytics = async (mileageData) => {
+  try {
+    const response = await api.post('/vehicle/mileage', mileageData);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching mileage analytics:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getStopSuggestions = async (stopsData) => {
+  try {
+    const response = await api.post('/vehicle/stop-suggestions', stopsData);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching stop suggestions:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
 export default api;
