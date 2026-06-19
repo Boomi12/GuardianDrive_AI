@@ -1,43 +1,88 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
-import { Compass, Calendar, Activity, BrainCircuit, ShieldAlert, Shield, Menu, X, ArrowUpRight } from 'lucide-react';
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Compass, Calendar, Activity, BrainCircuit, ShieldAlert, Shield, Menu, X, ArrowUpRight, LayoutDashboard, Sliders, LogOut } from 'lucide-react';
 
 // Import Pages
 import JourneyCompanion from './pages/JourneyCompanion';
 import Itinerary from './pages/Itinerary';
 import DigitalTwin from './pages/DigitalTwin';
 import AgentPanel from './pages/AgentPanel';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import VehicleSetup from './pages/VehicleSetup';
+import Dashboard from './pages/Dashboard';
+
+// Import Protected Route Guard
+import ProtectedRoute from './components/ProtectedRoute';
 
 import './App.css';
 
 // Dashboard layout component that wraps routes
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTripId, setActiveTripId] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // Poll localStorage occasionally to show active trip status in the navbar/sidebar
+  // Poll localStorage occasionally to show active trip status and auth state in the navbar/sidebar
+  const checkState = () => {
+    const tripId = localStorage.getItem('gd_tripId');
+    setActiveTripId(tripId);
+
+    const loggedUser = localStorage.getItem('gd_user');
+    if (loggedUser) {
+      setUser(JSON.parse(loggedUser));
+    } else {
+      setUser(null);
+    }
+  };
+
   useEffect(() => {
-    const checkTrip = () => {
-      const tripId = localStorage.getItem('gd_tripId');
-      setActiveTripId(tripId);
-    };
-
-    checkTrip();
-    window.addEventListener('storage', checkTrip);
-    window.addEventListener('twin-updated', checkTrip);
+    checkState();
+    window.addEventListener('storage', checkState);
+    window.addEventListener('twin-updated', checkState);
+    window.addEventListener('auth-change', checkState);
     
     // Custom interval to keep active trip ID in sync
-    const interval = setInterval(checkTrip, 2000);
+    const interval = setInterval(checkState, 2000);
     
     return () => {
-      window.removeEventListener('storage', checkTrip);
-      window.removeEventListener('twin-updated', checkTrip);
+      window.removeEventListener('storage', checkState);
+      window.removeEventListener('twin-updated', checkState);
+      window.removeEventListener('auth-change', checkState);
       clearInterval(interval);
     };
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('gd_token');
+    localStorage.removeItem('gd_user');
+    localStorage.removeItem('gd_vehicle');
+    localStorage.removeItem('gd_tripId');
+    localStorage.removeItem('gd_timeline');
+    localStorage.removeItem('gd_recommendations');
+    
+    // Dispatch auth state change locally
+    window.dispatchEvent(new Event('auth-change'));
+    
+    // Redirect to login
+    navigate('/login');
+  };
+
+  const isPublicPage = location.pathname === '/login' || location.pathname === '/signup';
+
+  if (isPublicPage) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-100 font-sans antialiased">
+        {children}
+      </div>
+    );
+  }
+
   const menuItems = [
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'Vehicle Setup', path: '/vehicle-setup', icon: Sliders },
     { name: 'Journey Companion', path: '/journey', icon: Compass },
     { name: 'Itinerary Planner', path: '/itinerary', icon: Calendar },
     { name: 'Digital Twin Studio', path: '/digital-twin', icon: Activity },
@@ -67,7 +112,7 @@ const DashboardLayout = ({ children }) => {
       <div className="flex-1 flex relative">
         {/* Left Sidebar (Desktop only) */}
         <aside className="hidden lg:flex w-72 bg-slate-900/60 border-r border-slate-800/80 flex-col justify-between sticky top-0 h-screen p-6 z-30 backdrop-blur-md">
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Logo */}
             <div className="flex items-center gap-2.5 px-2">
               <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-purple-600 to-blue-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
@@ -83,8 +128,20 @@ const DashboardLayout = ({ children }) => {
               </div>
             </div>
 
+            {user && (
+              <div className="px-3 py-2 bg-slate-950/40 border border-slate-850 rounded-xl flex items-center gap-3">
+                <div className="h-8 w-8 rounded-lg bg-purple-650 flex items-center justify-center font-bold text-white text-xs">
+                  {user.name ? user.name[0].toUpperCase() : 'U'}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-xs font-bold text-white truncate">{user.name}</h4>
+                  <p className="text-[9px] text-slate-500 truncate">{user.email}</p>
+                </div>
+              </div>
+            )}
+
             {/* Navigation links */}
-            <nav className="space-y-1.5">
+            <nav className="space-y-1">
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
@@ -93,13 +150,13 @@ const DashboardLayout = ({ children }) => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-semibold transition-all group ${
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all group ${
                       isActive
                         ? 'bg-purple-600/10 text-purple-300 border border-purple-500/30 shadow-md shadow-purple-500/5'
                         : 'text-slate-400 hover:text-white hover:bg-slate-800/40 border border-transparent'
                     }`}
                   >
-                    <Icon className={`h-4.5 w-4.5 transition-colors ${
+                    <Icon className={`h-4 w-4 transition-colors ${
                       isActive ? 'text-purple-400' : 'text-slate-400 group-hover:text-white'
                     }`} />
                     {item.name}
@@ -111,6 +168,14 @@ const DashboardLayout = ({ children }) => {
 
           {/* Active Trip Info and Credits */}
           <div className="space-y-4">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-transparent cursor-pointer"
+            >
+              <LogOut className="h-4 w-4 text-red-400" />
+              Sign Out
+            </button>
+
             {activeTripId ? (
               <div className="p-4 bg-slate-950/60 border border-slate-850 rounded-xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 h-1.5 w-1.5 bg-emerald-400 rounded-full animate-ping mt-3 mr-3"></div>
@@ -129,7 +194,7 @@ const DashboardLayout = ({ children }) => {
               </div>
             )}
 
-            <div className="text-[10px] text-slate-600 text-center font-medium">
+            <div className="text-[10px] text-slate-650 text-center font-medium">
               GuardianDrive AI © 2026. Hackathon Module.
             </div>
           </div>
@@ -157,7 +222,19 @@ const DashboardLayout = ({ children }) => {
                   </button>
                 </div>
 
-                <div className="space-y-2">
+                {user && (
+                  <div className="px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-lg bg-purple-650 flex items-center justify-center font-bold text-white text-xs">
+                      {user.name ? user.name[0].toUpperCase() : 'U'}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="text-xs font-bold text-white truncate">{user.name}</h4>
+                      <p className="text-[9px] text-slate-500 truncate">{user.email}</p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-1.5">
                   {menuItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = location.pathname === item.path;
@@ -167,7 +244,7 @@ const DashboardLayout = ({ children }) => {
                         key={item.path}
                         to={item.path}
                         onClick={toggleMobileMenu}
-                        className={`flex items-center gap-3.5 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                           isActive
                             ? 'bg-purple-600/10 text-purple-300 border border-purple-500/20'
                             : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
@@ -178,6 +255,17 @@ const DashboardLayout = ({ children }) => {
                       </Link>
                     );
                   })}
+
+                  <button
+                    onClick={() => {
+                      toggleMobileMenu();
+                      handleLogout();
+                    }}
+                    className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg text-xs font-semibold transition-all text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-transparent cursor-pointer"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
+                  </button>
                 </div>
               </div>
 
@@ -207,12 +295,21 @@ const App = () => {
     <BrowserRouter>
       <DashboardLayout>
         <Routes>
-          <Route path="/journey" element={<JourneyCompanion />} />
-          <Route path="/itinerary" element={<Itinerary />} />
-          <Route path="/digital-twin" element={<DigitalTwin />} />
-          <Route path="/agents" element={<AgentPanel />} />
-          <Route path="/" element={<Navigate to="/journey" replace />} />
-          <Route path="*" element={<Navigate to="/journey" replace />} />
+          {/* Public Authentication routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Protected routes */}
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/vehicle-setup" element={<ProtectedRoute><VehicleSetup /></ProtectedRoute>} />
+          <Route path="/journey" element={<ProtectedRoute><JourneyCompanion /></ProtectedRoute>} />
+          <Route path="/itinerary" element={<ProtectedRoute><Itinerary /></ProtectedRoute>} />
+          <Route path="/digital-twin" element={<ProtectedRoute><DigitalTwin /></ProtectedRoute>} />
+          <Route path="/agents" element={<ProtectedRoute><AgentPanel /></ProtectedRoute>} />
+
+          {/* Root Redirects */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </DashboardLayout>
     </BrowserRouter>

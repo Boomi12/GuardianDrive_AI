@@ -9,6 +9,20 @@ const api = axios.create({
   }
 });
 
+// Add request interceptor to add token to headers
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('gd_token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Journey Itinerary API calls
 export const generateItinerary = async (tripData) => {
   try {
@@ -109,6 +123,68 @@ export const getAgentRecommendations = async (tripId) => {
     return response.data;
   } catch (error) {
     console.error(`Error fetching agent recommendations for tripId ${tripId}:`, error);
+    throw error.response?.data || error.message;
+  }
+};
+
+// Authentication API calls
+export const signup = async (name, email, password) => {
+  try {
+    const response = await api.post('/auth/signup', { name, email, password });
+    return response.data;
+  } catch (error) {
+    console.error('Error in signup:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const login = async (email, password) => {
+  try {
+    const response = await api.post('/auth/login', { email, password });
+    return response.data;
+  } catch (error) {
+    console.error('Error in login:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getMe = async () => {
+  try {
+    const response = await api.get('/auth/me');
+    return response.data;
+  } catch (error) {
+    console.error('Error in getMe:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+// Vehicle API calls
+export const saveVehicle = async (vehicleData) => {
+  try {
+    const response = await api.post('/vehicle', vehicleData);
+    return response.data;
+  } catch (error) {
+    console.error('Error in saveVehicle:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getVehicle = async (userId) => {
+  try {
+    const response = await api.get(`/vehicle/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching vehicle for userId ${userId}:`, error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const updateVehicle = async (userId, vehicleData) => {
+  try {
+    const response = await api.put(`/vehicle/${userId}`, vehicleData);
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating vehicle for userId ${userId}:`, error);
     throw error.response?.data || error.message;
   }
 };
