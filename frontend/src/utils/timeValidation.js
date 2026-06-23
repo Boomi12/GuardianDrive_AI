@@ -164,6 +164,9 @@ export function getLocalSpecs(name) {
   const key = name.toLowerCase().trim();
   if (PLACE_SPECS_DB[key]) return PLACE_SPECS_DB[key];
 
+  if (key.includes("arrive in") || key.includes("arrive at")) {
+    return { open: "24 hours", duration: 0, type: "arrival" };
+  }
   if (key.includes("palace") || key.includes("temple") || key.includes("garden") || key.includes("lake") || key.includes("falls") || key.includes("peak") || key.includes("hills")) {
     return { open: "09:00 AM", close: "06:00 PM", duration: 90, type: "attraction" };
   }
@@ -184,7 +187,7 @@ export function getLocalTravelOffset(fromPlace, toPlace, source, destination) {
   if (f === t) return 0;
 
   const isFromSrc = f === src || f.includes("start from");
-  const isToDst = t === dst || t.includes("arrive at");
+  const isToDst = t === dst || t.includes("arrive at") || t.includes("arrive in");
 
   // Route drives
   if (isFromSrc && isToDst) {
@@ -269,7 +272,7 @@ export function validateWaypointTime(waypoint, previousWaypoint, nextWaypoint, t
   // 4. Check if overlaps with next stop
   if (nextWaypoint) {
     const specs = getLocalSpecs(waypoint.place);
-    const duration = specs.duration || 60;
+    const duration = specs.duration !== undefined ? specs.duration : 60;
     const endTime = addMinutes(arrivalTime, duration);
     const endMins = timeToMinutes(endTime);
 
@@ -285,15 +288,18 @@ export function validateWaypointTime(waypoint, previousWaypoint, nextWaypoint, t
     }
   }
 
-  // 5. Check opening hours
-  const specs = getLocalSpecs(waypoint.place);
-  const openVal = isPlaceOpen(waypoint.place, arrivalTime, specs.duration || 60);
-  if (!openVal) {
-    return {
-      valid: false,
-      reason: "PLACE_CLOSED",
-      message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${specs.open} - ${specs.close}.`
-    };
+  // 5. Check opening hours (skip if it is the starting city, i.e., previousWaypoint is null)
+  if (previousWaypoint !== null && previousWaypoint !== undefined) {
+    const specs = getLocalSpecs(waypoint.place);
+    const duration = specs.duration !== undefined ? specs.duration : 60;
+    const openVal = isPlaceOpen(waypoint.place, arrivalTime, duration);
+    if (!openVal) {
+      return {
+        valid: false,
+        reason: "PLACE_CLOSED",
+        message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${specs.open} - ${specs.close}.`
+      };
+    }
   }
 
   return { valid: true };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVehicle, getTwinState } from '../services/api';
-import { Shield, ShieldAlert, Zap, Fuel, Activity, Navigation, Eye, User, Sparkles, MapPin, PhoneCall, AlertOctagon } from 'lucide-react';
+import { Shield, ShieldAlert, Zap, Fuel, Activity, Navigation, Eye, User, Sparkles, MapPin, PhoneCall, AlertOctagon, BrainCircuit } from 'lucide-react';
 import DashboardCard from '../components/DashboardCard';
 import StatusBadge from '../components/StatusBadge';
 import AlertCard from '../components/AlertCard';
@@ -367,17 +367,17 @@ const Dashboard = () => {
               color: 'from-blue-500/15 to-cyan-500/5 text-blue-300 hover:border-blue-500/30'
             },
             {
-              name: 'Twin Studio',
+              name: 'Digital Twin',
               desc: 'Simulate telemetry twin updates',
               path: '/digital-twin',
               icon: Activity,
               color: 'from-emerald-500/15 to-teal-500/5 text-emerald-300 hover:border-emerald-500/30'
             },
             {
-              name: 'Vehicle Health',
-              desc: 'Inspect diagnostics & parameters',
-              path: '/vehicle-setup',
-              icon: Shield,
+              name: 'AI Agents',
+              desc: 'Inspect recommendations & safety agents',
+              path: '/agents',
+              icon: BrainCircuit,
               color: 'from-yellow-500/15 to-amber-500/5 text-yellow-300 hover:border-yellow-500/30'
             }
           ].map((action, idx) => {

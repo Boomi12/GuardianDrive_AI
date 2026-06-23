@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Compass, ArrowRight, Loader2, UtensilsCrossed, CalendarRange, Car, DollarSign, Plus, Trash2, Check, Search, PlusCircle, Sparkles } from 'lucide-react';
-import { generateItinerary, recommendPlaces, updateItineraryTimeline, getItinerary } from '../services/api';
+import { MapPin, Compass, ArrowRight, Loader2, UtensilsCrossed, CalendarRange, Car, DollarSign, Plus, Trash2, Check, Search, PlusCircle, Sparkles, ShieldAlert } from 'lucide-react';
+import { generateItinerary, recommendPlaces, updateItineraryTimeline, getItinerary, getVehicle } from '../services/api';
 import { 
   getCurrentDate, 
   getCurrentTimeRounded, 
@@ -15,6 +15,8 @@ import {
 
 const JourneyCompanion = () => {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('gd_user') || '{}');
+  
   const [formData, setFormData] = useState({
     source: 'Bangalore',
     destination: 'Mysore',
@@ -28,6 +30,8 @@ const JourneyCompanion = () => {
     mileageOrRange: 340
   });
 
+  const [vehicle, setVehicle] = useState(null);
+  const [vehicleLoading, setVehicleLoading] = useState(true);
   const [formErrors, setFormErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(true);
 
@@ -36,6 +40,53 @@ const JourneyCompanion = () => {
   const [error, setError] = useState(null);
   const [recommendations, setRecommendations] = useState(null);
   const [activeTab, setActiveTab] = useState('attractions');
+
+  // Fetch Vehicle Profile
+  useEffect(() => {
+    const fetchVehicleProfile = async () => {
+      setVehicleLoading(true);
+      // Try local storage first to be responsive
+      const localVehicle = localStorage.getItem('gd_vehicle');
+      if (localVehicle) {
+        try {
+          const parsed = JSON.parse(localVehicle);
+          setVehicle(parsed);
+          setFormData(prev => ({
+            ...prev,
+            vehicleType: parsed.type,
+            fuelOrBatteryLevel: parsed.type === 'EV' ? parsed.batteryPercentage : parsed.fuelPercentage,
+            mileageOrRange: parsed.range
+          }));
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      if (!user.id) {
+        setVehicleLoading(false);
+        return;
+      }
+
+      try {
+        const res = await getVehicle(user.id);
+        if (res.success && res.data) {
+          setVehicle(res.data);
+          localStorage.setItem('gd_vehicle', JSON.stringify(res.data));
+          setFormData(prev => ({
+            ...prev,
+            vehicleType: res.data.type,
+            fuelOrBatteryLevel: res.data.type === 'EV' ? res.data.batteryPercentage : res.data.fuelPercentage,
+            mileageOrRange: res.data.range
+          }));
+        }
+      } catch (err) {
+        console.error('Error fetching vehicle profile from API:', err);
+      } finally {
+        setVehicleLoading(false);
+      }
+    };
+    fetchVehicleProfile();
+  }, [user.id]);
 
   // Real-time trip validation hook
   useEffect(() => {
@@ -49,16 +100,18 @@ const JourneyCompanion = () => {
       }
     }
     
-    if (formData.fuelOrBatteryLevel < 0 || formData.fuelOrBatteryLevel > 100) {
-      errors.fuelOrBatteryLevel = "Battery/Fuel level must be between 0% and 100%.";
-    }
-    if (formData.mileageOrRange < 50 || formData.mileageOrRange > 1500) {
-      errors.mileageOrRange = "Range must be between 50km and 1500km.";
+    if (vehicle) {
+      if (formData.fuelOrBatteryLevel < 0 || formData.fuelOrBatteryLevel > 100) {
+        errors.fuelOrBatteryLevel = "Battery/Fuel level must be between 0% and 100%.";
+      }
+      if (formData.mileageOrRange < 50 || formData.mileageOrRange > 1500) {
+        errors.mileageOrRange = "Range must be between 50km and 1500km.";
+      }
     }
 
     setFormErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
-  }, [formData]);
+  }, [formData, vehicle]);
   
   // Custom interactive itinerary states
   const [tripId, setTripId] = useState(null);
@@ -302,7 +355,8 @@ const JourneyCompanion = () => {
     
     // Check opening hours first
     const specs = getLocalSpecs(item.name);
-    const isOpen = isPlaceOpen(item.name, timeVal, specs.duration || 60);
+    const duration = specs.duration !== undefined ? specs.duration : 60;
+    const isOpen = isPlaceOpen(item.name, timeVal, duration);
     if (!isOpen) {
       return { valid: false, reason: `Closed (Opens: ${specs.open} - ${specs.close})` };
     }
@@ -379,6 +433,67 @@ const JourneyCompanion = () => {
               Trip Configuration
             </h2>
 
+            {vehicleLoading ? (
+              <div className="flex flex-col items-center justify-center p-6 bg-slate-950/40 border border-slate-850 rounded-xl mb-4">
+                <Loader2 className="animate-spin h-5 w-5 text-purple-500 mb-2" />
+                <span className="text-[10px] text-slate-500">Retrieving vehicle profile...</span>
+              </div>
+            ) : vehicle ? (
+              <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 mb-4 relative overflow-hidden">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex items-center gap-2">
+                    <Car className="h-4 w-4 text-purple-400" />
+                    <span className="text-xs font-bold text-white">{vehicle.model}</span>
+                  </div>
+                  <span className="px-2 py-0.5 bg-purple-500/10 text-purple-400 text-[9px] font-bold rounded border border-purple-500/20">
+                    {vehicle.type}
+                  </span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-[11px] mb-3">
+                  <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-850">
+                    <span className="text-slate-500 block text-[9px] font-semibold uppercase">Charge / Fuel</span>
+                    <span className="text-slate-200 font-bold">
+                      {vehicle.type === 'EV' ? `${vehicle.batteryPercentage}%` : `${vehicle.fuelPercentage}%`}
+                    </span>
+                  </div>
+                  <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-850">
+                    <span className="text-slate-500 block text-[9px] font-semibold uppercase">Current Range</span>
+                    <span className="text-slate-200 font-bold">{vehicle.range} km</span>
+                  </div>
+                  {vehicle.type !== 'EV' && (
+                    <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-850 col-span-2">
+                      <span className="text-slate-500 block text-[9px] font-semibold uppercase">Mileage</span>
+                      <span className="text-slate-200 font-bold">{vehicle.mileage} km/l</span>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => navigate('/vehicle-setup')}
+                  className="w-full py-1.5 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-purple-500/30 text-purple-300 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-center"
+                >
+                  Edit Vehicle Profile
+                </button>
+              </div>
+            ) : (
+              <div className="bg-rose-500/5 border border-rose-500/20 rounded-xl p-4 mb-4 text-center">
+                <ShieldAlert className="h-8 w-8 text-rose-400 mx-auto mb-2 animate-pulse" />
+                <h4 className="text-xs font-bold text-white mb-1">Vehicle Setup Required</h4>
+                <p className="text-[11px] text-slate-400 leading-relaxed mb-3">
+                  Complete Vehicle Setup before planning a trip.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => navigate('/vehicle-setup')}
+                  className="w-full py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-lg text-xs font-bold transition-all cursor-pointer shadow-md"
+                >
+                  Go to Vehicle Setup
+                </button>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
@@ -419,40 +534,21 @@ const JourneyCompanion = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                    Trip Type
-                  </label>
-                  <select
-                    name="tripType"
-                    value={formData.tripType}
-                    onChange={handleChange}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none"
-                  >
-                    <option value="Solo">Solo</option>
-                    <option value="Family">Family</option>
-                    <option value="Friends">Friends</option>
-                    <option value="Business">Business</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                    Vehicle Type
-                  </label>
-                  <select
-                    name="vehicleType"
-                    value={formData.vehicleType}
-                    onChange={handleChange}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none"
-                  >
-                    <option value="EV">Electric (EV)</option>
-                    <option value="Petrol">Petrol</option>
-                    <option value="Diesel">Diesel</option>
-                    <option value="Hybrid">Hybrid</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+                  Trip Type
+                </label>
+                <select
+                  name="tripType"
+                  value={formData.tripType}
+                  onChange={handleChange}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none cursor-pointer"
+                >
+                  <option value="Solo">Solo</option>
+                  <option value="Family">Family</option>
+                  <option value="Friends">Friends</option>
+                  <option value="Business">Business</option>
+                </select>
               </div>
 
               {/* Trip Date & Start Time */}
@@ -502,55 +598,6 @@ const JourneyCompanion = () => {
                 </div>
               </div>
 
-              {/* Fuel Level & Range */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                    {formData.vehicleType === 'EV' ? 'Battery level (%)' : 'Fuel Level (%)'}
-                  </label>
-                  <input
-                    type="number"
-                    name="fuelOrBatteryLevel"
-                    min="0"
-                    max="100"
-                    value={formData.fuelOrBatteryLevel}
-                    onChange={handleChange}
-                    required
-                    className={`w-full bg-slate-950 border rounded-lg py-1.5 px-3 text-white text-xs focus:outline-none transition-colors ${
-                      formErrors.fuelOrBatteryLevel
-                        ? 'border-red-500 focus:border-red-500'
-                        : 'border-emerald-500/30 focus:border-purple-500/80'
-                    }`}
-                  />
-                  {formErrors.fuelOrBatteryLevel && (
-                    <span className="text-[9px] text-red-400 mt-1 block font-medium">{formErrors.fuelOrBatteryLevel}</span>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                    {formData.vehicleType === 'EV' ? 'Max Range (km)' : 'Tank Range (km)'}
-                  </label>
-                  <input
-                    type="number"
-                    name="mileageOrRange"
-                    min="50"
-                    max="1500"
-                    value={formData.mileageOrRange}
-                    onChange={handleChange}
-                    required
-                    className={`w-full bg-slate-950 border rounded-lg py-1.5 px-3 text-white text-xs focus:outline-none transition-colors ${
-                      formErrors.mileageOrRange
-                        ? 'border-red-500 focus:border-red-500'
-                        : 'border-emerald-500/30 focus:border-purple-500/80'
-                    }`}
-                  />
-                  {formErrors.mileageOrRange && (
-                    <span className="text-[9px] text-red-400 mt-1 block font-medium">{formErrors.mileageOrRange}</span>
-                  )}
-                </div>
-              </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
@@ -560,7 +607,7 @@ const JourneyCompanion = () => {
                     name="foodPreference"
                     value={formData.foodPreference}
                     onChange={handleChange}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none cursor-pointer"
                   >
                     <option value="Any">Any</option>
                     <option value="Veg">Veg Only</option>
@@ -577,7 +624,7 @@ const JourneyCompanion = () => {
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-white text-xs focus:outline-none focus:border-purple-500/80 transition-colors appearance-none cursor-pointer"
                   >
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
@@ -602,9 +649,9 @@ const JourneyCompanion = () => {
 
               <button
                 type="submit"
-                disabled={!isFormValid || loading}
+                disabled={!isFormValid || loading || !vehicle}
                 className={`w-full text-white rounded-lg py-2.5 font-semibold text-xs transition-all flex items-center justify-center gap-1.5 mt-3 shadow-md ${
-                  !isFormValid
+                  (!isFormValid || !vehicle)
                     ? 'bg-slate-800 text-slate-500 cursor-not-allowed opacity-50 border border-slate-700'
                     : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 cursor-pointer hover:shadow-purple-500/15'
                 }`}

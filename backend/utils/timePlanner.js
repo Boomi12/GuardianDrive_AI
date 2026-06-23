@@ -104,6 +104,9 @@ export function getPlaceSpecs(name) {
   }
 
   // Dynamic keyword checking
+  if (key.includes("arrive in") || key.includes("arrive at")) {
+    return { open: "24 hours", duration: 0, type: "arrival" };
+  }
   if (key.includes("palace") || key.includes("temple") || key.includes("garden") || key.includes("lake") || key.includes("falls") || key.includes("peak") || key.includes("hills") || key.includes("viewpoint")) {
     return { open: "09:00 AM", close: "06:00 PM", duration: 90, type: "attraction" };
   }
@@ -130,7 +133,7 @@ export function getTravelTime(fromPlace, toPlace, source, destination) {
   if (f === t) return 0;
 
   const isFromSrc = f === src || f.includes("start from");
-  const isToDst = t === dst || t.includes("arrive at");
+  const isToDst = t === dst || t.includes("arrive at") || t.includes("arrive in");
 
   // Major highway routes
   if (isFromSrc && isToDst) {
@@ -247,7 +250,7 @@ export function validateWaypointEdit(input) {
   }
 
   // 2. Check past time today
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = new Date().toLocaleDateString('en-CA');
   if (tripDate === todayStr) {
     const now = new Date();
     const currentMins = now.getHours() * 60 + now.getMinutes();
@@ -288,16 +291,19 @@ export function validateWaypointEdit(input) {
     }
   }
 
-  // 5. Check opening hours
-  const specs = getPlaceSpecs(waypoint.place);
-  const isOpen = checkOpeningHours(waypoint.place, arrivalTime, specs.duration || 60);
-  if (!isOpen) {
-    const nextSlot = suggestNextAvailableSlot(waypoint.place, arrivalMins);
-    return {
-      valid: false,
-      reason: "PLACE_CLOSED",
-      message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${specs.open} - ${specs.close}. Suggested next opening: ${nextSlot}.`
-    };
+  // 5. Check opening hours (skip if it is the starting city, i.e., previousWaypoint is null)
+  if (previousWaypoint !== null && previousWaypoint !== undefined) {
+    const specs = getPlaceSpecs(waypoint.place);
+    const duration = specs.duration !== undefined ? specs.duration : 60;
+    const isOpen = checkOpeningHours(waypoint.place, arrivalTime, duration);
+    if (!isOpen) {
+      const nextSlot = suggestNextAvailableSlot(waypoint.place, arrivalMins);
+      return {
+        valid: false,
+        reason: "PLACE_CLOSED",
+        message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${specs.open} - ${specs.close}. Suggested next opening: ${nextSlot}.`
+      };
+    }
   }
 
   return { valid: true };
@@ -323,6 +329,9 @@ export function generateAccurateItinerary(input) {
 
   const timeline = [];
   let currentTime = timeToMinutes(startTime);
+
+  console.log(`[DEBUG] Selected start time: ${startTime}`);
+  console.log(`[DEBUG] Parsed start time: ${currentTime} mins`);
 
   // 1. Departure from Source
   timeline.push({
@@ -480,7 +489,7 @@ export function validateItinerary(itinerary) {
   const { timeline, source, destination, startTime, tripDate } = itinerary;
   
   // Trip date check
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = new Date().toLocaleDateString('en-CA');
   if (tripDate && tripDate < todayStr) {
     return { success: false, reason: "PAST_DATE", message: "Invalid date: Trip date cannot be in the past." };
   }
@@ -509,6 +518,8 @@ export function validateTimeline(timeline, tripDetails) {
   if (!timeline || timeline.length === 0) {
     return { success: true, timeline: [], overallWarning: null };
   }
+
+  console.log(`[DEBUG] Generated first waypoint time: ${timeline[0]?.time}`);
 
   const validated = [];
   let currentTime = timeToMinutes(startTime);
@@ -545,13 +556,14 @@ export function validateTimeline(timeline, tripDetails) {
       item.time = arrivalTimeStr;
     }
 
-    const departureTime = currentTime + (specs.duration || 60);
+    const duration = i === 0 ? 0 : (specs.duration !== undefined ? specs.duration : 60);
+    const departureTime = currentTime + duration;
     item.endTime = minutesToTime(departureTime);
 
-    const isInsideHours = checkOpeningHours(item.place, item.time, specs.duration || 60);
+    const isInsideHours = i === 0 ? true : checkOpeningHours(item.place, item.time, duration);
     item.isOpen = isInsideHours;
 
-    if (!isInsideHours && !item.warning) {
+    if (i > 0 && !isInsideHours && !item.warning) {
       const nextSlot = suggestNextAvailableSlot(item.place, currentTime);
       item.warning = `${item.place} is closed at ${item.time}. Opening hours: ${specs.open} - ${specs.close}. Suggested next open: ${nextSlot}.`;
     }

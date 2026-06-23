@@ -1,5 +1,6 @@
 const BASE_URL = 'http://localhost:5000/api';
 const tripId = 'TEST_TRIP_' + Math.random().toString(36).substring(2, 7).toUpperCase();
+const futureDate = new Date(Date.now() + 7 * 24 * 3600 * 1000).toLocaleDateString('en-CA');
 
 async function runTests() {
   console.log('=== GuardianDrive AI API Integration Test ===');
@@ -19,7 +20,7 @@ async function runTests() {
         foodPreference: 'Any',
         budget: 'Medium',
         vehicleType: 'EV',
-        tripDate: '2026-06-15',
+        tripDate: futureDate,
         startTime: '09:00 AM',
         fuelOrBatteryLevel: 85,
         mileageOrRange: 340

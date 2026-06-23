@@ -81,13 +81,13 @@ router.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Missing source, destination, or tripId' });
     }
 
-    const tDate = tripDate || new Date().toISOString().split('T')[0];
+    const tDate = tripDate || new Date().toLocaleDateString('en-CA');
     const tStartTime = startTime || '09:00 AM';
     const fuelVal = fuelOrBatteryLevel !== undefined ? Number(fuelOrBatteryLevel) : 85;
     const rangeVal = mileageOrRange !== undefined ? Number(mileageOrRange) : (vehicleType?.toUpperCase() === 'EV' ? 340 : 580);
 
     // Enforce past date check strictly
-    const todayStr = new Date().toISOString().split('T')[0];
+    const todayStr = new Date().toLocaleDateString('en-CA');
     if (tDate < todayStr) {
       return res.status(400).json({
         valid: false,
@@ -204,7 +204,7 @@ router.post('/validate', async (req, res) => {
       return res.status(400).json({ error: 'Missing timeline or tripDetails' });
     }
 
-    const todayStr = new Date().toISOString().split('T')[0];
+    const todayStr = new Date().toLocaleDateString('en-CA');
     if (tripDetails.tripDate && tripDetails.tripDate < todayStr) {
       return res.status(400).json({
         valid: false,
