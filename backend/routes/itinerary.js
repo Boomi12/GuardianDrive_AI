@@ -7,7 +7,9 @@ import {
   generateAccurateItinerary, 
   validateTimeline, 
   validateWaypointEdit, 
-  timeToMinutes 
+  timeToMinutes,
+  isPastDate,
+  isPastTimeToday
 } from '../utils/timePlanner.js';
 
 const router = express.Router();
@@ -87,8 +89,7 @@ router.post('/generate', async (req, res) => {
     const rangeVal = mileageOrRange !== undefined ? Number(mileageOrRange) : (vehicleType?.toUpperCase() === 'EV' ? 340 : 580);
 
     // Enforce past date check strictly
-    const todayStr = new Date().toLocaleDateString('en-CA');
-    if (tDate < todayStr) {
+    if (isPastDate(tDate)) {
       return res.status(400).json({
         valid: false,
         reason: "PAST_DATE",
@@ -97,17 +98,12 @@ router.post('/generate', async (req, res) => {
     }
 
     // Enforce past time check strictly
-    if (tDate === todayStr) {
-      const selectedMins = timeToMinutes(tStartTime);
-      const now = new Date();
-      const currentMins = now.getHours() * 60 + now.getMinutes();
-      if (selectedMins < currentMins) {
-        return res.status(400).json({
-          valid: false,
-          reason: "PAST_TIME",
-          message: "Invalid time: Start time cannot be earlier than the current time."
-        });
-      }
+    if (isPastTimeToday(tDate, tStartTime)) {
+      return res.status(400).json({
+        valid: false,
+        reason: "PAST_TIME",
+        message: "Invalid time: Start time cannot be earlier than the current time."
+      });
     }
 
     // Generate accurate timeline using new timePlanner scheduling engine
@@ -204,8 +200,7 @@ router.post('/validate', async (req, res) => {
       return res.status(400).json({ error: 'Missing timeline or tripDetails' });
     }
 
-    const todayStr = new Date().toLocaleDateString('en-CA');
-    if (tripDetails.tripDate && tripDetails.tripDate < todayStr) {
+    if (isPastDate(tripDetails.tripDate)) {
       return res.status(400).json({
         valid: false,
         reason: "PAST_DATE",
@@ -213,17 +208,12 @@ router.post('/validate', async (req, res) => {
       });
     }
 
-    if (tripDetails.tripDate === todayStr && tripDetails.startTime) {
-      const selectedMins = timeToMinutes(tripDetails.startTime);
-      const now = new Date();
-      const currentMins = now.getHours() * 60 + now.getMinutes();
-      if (selectedMins < currentMins) {
-        return res.status(400).json({
-          valid: false,
-          reason: "PAST_TIME",
-          message: "Invalid time: Start time cannot be earlier than the current time."
-        });
-      }
+    if (tripDetails.startTime && isPastTimeToday(tripDetails.tripDate, tripDetails.startTime)) {
+      return res.status(400).json({
+        valid: false,
+        reason: "PAST_TIME",
+        message: "Invalid time: Start time cannot be earlier than the current time."
+      });
     }
 
     const validation = validateTimeline(timeline, tripDetails);

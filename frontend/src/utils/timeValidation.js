@@ -63,21 +63,68 @@ export function minutesToTime(minutes) {
   return `${padH}:${padM} ${ampm}`;
 }
 
-// Check if a date string is in the past
-export function isPastDate(dateStr) {
+// Parse a date string (supporting YYYY-MM-DD and DD-MM-YYYY) manually in the local timezone
+export function parseLocalDate(dateStr) {
+  if (!dateStr) return new Date();
+  
+  const cleaned = dateStr.trim();
+  let parts = cleaned.split('-');
+  if (parts.length !== 3) {
+    parts = cleaned.split('/');
+  }
+  
+  if (parts.length === 3) {
+    let year, month, day;
+    if (parts[0].length === 4) {
+      // YYYY-MM-DD
+      year = parseInt(parts[0], 10);
+      month = parseInt(parts[1], 10);
+      day = parseInt(parts[2], 10);
+    } else if (parts[2].length === 4) {
+      // DD-MM-YYYY
+      day = parseInt(parts[0], 10);
+      month = parseInt(parts[1], 10);
+      year = parseInt(parts[2], 10);
+    } else {
+      // Fallback
+      year = parseInt(parts[0], 10);
+      month = parseInt(parts[1], 10);
+      day = parseInt(parts[2], 10);
+    }
+    return new Date(year, month - 1, day, 0, 0, 0, 0);
+  }
+  
+  const d = new Date(cleaned);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+// Check if a date string is today's date in local time
+export function isToday(dateStr, relativeTo = new Date()) {
   if (!dateStr) return false;
-  const selected = new Date(dateStr + 'T00:00:00');
-  const today = new Date(getCurrentDate() + 'T00:00:00');
-  return selected < today;
+  const selectedDate = parseLocalDate(dateStr);
+  const today = relativeTo;
+  return selectedDate.getFullYear() === today.getFullYear() &&
+         selectedDate.getMonth() === today.getMonth() &&
+         selectedDate.getDate() === today.getDate();
+}
+
+// Check if a date string is in the past
+export function isPastDate(dateStr, relativeTo = new Date()) {
+  if (!dateStr) return false;
+  const selectedDate = parseLocalDate(dateStr);
+  const today = new Date(relativeTo);
+  today.setHours(0, 0, 0, 0);
+  return selectedDate.getTime() < today.getTime();
 }
 
 // Check if a time string is in the past for today's date
-export function isPastTimeToday(dateStr, timeStr) {
+export function isPastTimeToday(dateStr, timeStr, relativeTo = new Date()) {
   if (!dateStr || !timeStr) return false;
-  if (dateStr !== getCurrentDate()) return false;
+  if (!isToday(dateStr, relativeTo)) return false;
   
   const selectedMins = timeToMinutes(timeStr);
-  const now = new Date();
+  const now = relativeTo;
   const currentMins = now.getHours() * 60 + now.getMinutes();
   return selectedMins < currentMins;
 }
