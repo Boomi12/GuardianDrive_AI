@@ -467,6 +467,14 @@ export function generateAccurateItinerary(input) {
 
   const preferredRestaurant = destData.restaurants?.[0]?.name || "Local Dine";
   const restaurantSpecs = getPlaceSpecs(preferredRestaurant);
+  const localRestaurantTransit = getTravelTime(destination, preferredRestaurant, source, destination);
+  const earliestRestaurantArrival = currentTime + localRestaurantTransit;
+
+  console.log(`[DEBUG] Trip Start Time: ${startTime}`);
+  console.log(`[DEBUG] Calculated Travel Duration (Driving Time): ${formatMinutes(totalTravelMinutes)}`);
+  console.log(`[DEBUG] Destination Arrival Time: ${minutesToTime(currentTime)}`);
+  console.log(`[DEBUG] Earliest Restaurant Arrival Time: ${minutesToTime(earliestRestaurantArrival)}`);
+
   const isLunchTime = currentTime >= timeToMinutes("12:00 PM") && currentTime <= timeToMinutes("02:30 PM");
 
   if (isLunchTime) {

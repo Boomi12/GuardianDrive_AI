@@ -374,15 +374,49 @@ const JourneyCompanion = () => {
 
     // Timeline travel checks
     if (timeline.length > 0) {
-      const lastStop = timeline[timeline.length - 1];
       const source = timeline[0].place;
       const destination = formData.destination;
-      const transit = getLocalTravelOffset(lastStop.place, item.name, source, destination);
-      const earliestArrivalStr = getEarliestArrival(lastStop, transit);
-      const earliestArrivalMins = timeToMinutes(earliestArrivalStr);
       
-      if (timeToMinutes(timeVal) < earliestArrivalMins) {
-        return { valid: false, reason: `Unavailable: Earliest arrival is ${earliestArrivalStr}` };
+      const newItem = {
+        place: item.name,
+        time: timeVal,
+        purpose: type === 'restaurant' ? 'Meal Break' : (type === 'restStop' ? 'Rest Stop' : (type === 'lodging' ? 'Overnight Stay' : 'Sightseeing'))
+      };
+
+      // Exclude item by name if already temporarily added, then sort
+      const filteredTimeline = timeline.filter(e => e.place.toLowerCase() !== item.name.toLowerCase());
+      const simulatedTimeline = [...filteredTimeline, newItem].sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+      
+      const idx = simulatedTimeline.findIndex(e => e.place.toLowerCase() === item.name.toLowerCase());
+      
+      // 1. Check preceding waypoint constraints
+      if (idx > 0) {
+        const predecessor = simulatedTimeline[idx - 1];
+        const transit = getLocalTravelOffset(predecessor.place, newItem.place, source, destination);
+        const earliestArrivalStr = getEarliestArrival(predecessor, transit);
+        const earliestArrivalMins = timeToMinutes(earliestArrivalStr);
+        if (timeToMinutes(timeVal) < earliestArrivalMins) {
+          return { 
+            valid: false, 
+            reason: `Unavailable: Earliest arrival after ${predecessor.place} is ${earliestArrivalStr} (transit: ${transit}m)` 
+          };
+        }
+      }
+
+      // 2. Check succeeding waypoint constraints
+      if (idx < simulatedTimeline.length - 1) {
+        const successor = simulatedTimeline[idx + 1];
+        const transitToSuccessor = getLocalTravelOffset(newItem.place, successor.place, source, destination);
+        const endTimeMins = timeToMinutes(timeVal) + duration;
+        const earliestSuccessorArrivalMins = endTimeMins + transitToSuccessor;
+        const successorScheduledMins = timeToMinutes(successor.time);
+        
+        if (successorScheduledMins < earliestSuccessorArrivalMins) {
+          return { 
+            valid: false, 
+            reason: `Overlap conflict: ${successor.place} starts at ${successor.time}, but you can only reach it at ${minutesToTime(earliestSuccessorArrivalMins)} (duration: ${duration}m, transit: ${transitToSuccessor}m)` 
+          };
+        }
       }
     }
 
