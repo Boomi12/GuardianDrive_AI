@@ -2,11 +2,11 @@
 Trip Route:         Bangalore -> Mysore
 Start Time:         06:00 AM
 Travel Duration:    3h 15m (195 mins driving)
-Destination Arrival:09:45 AM
+Destination Arrival:10:00 AM
 
 --- Restaurant Selection Details ---
 Preferred Restaurant: Hotel Mylari
 Restaurant Closing:   10:00 PM
 Transit to Restaurant: 15 mins
-Restaurant Arrival Window: 10:00 AM to 10:00 PM
+Restaurant Arrival Window: 10:15 AM to 10:00 PM
 ====================================================

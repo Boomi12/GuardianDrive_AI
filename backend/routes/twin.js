@@ -52,6 +52,18 @@ router.post('/update', async (req, res) => {
       twin.journeyTwin = { ...twin.journeyTwin.toObject(), ...journeyTwin };
     }
 
+    // Automatically raise risk level if weather is adverse
+    if (twin.journeyTwin && twin.journeyTwin.weather) {
+      const weatherVal = twin.journeyTwin.weather.toLowerCase();
+      if (weatherVal === 'thunderstorm') {
+        twin.journeyTwin.riskLevel = 'critical';
+      } else if (['rain', 'fog', 'snow'].includes(weatherVal)) {
+        if (twin.journeyTwin.riskLevel !== 'critical') {
+          twin.journeyTwin.riskLevel = 'medium';
+        }
+      }
+    }
+
     // Save the updated twin state
     await twin.save();
 

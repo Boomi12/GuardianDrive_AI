@@ -58,8 +58,8 @@ Restaurant Arrival Window: ${earliestArrivalStr} to ${latestArrivalStr}
 `;
 
   console.log(report);
-  fs.writeFileSync('backend/itinerary_test_report.txt', report);
-  console.log('Report written to backend/itinerary_test_report.txt');
+  fs.writeFileSync('itinerary_test_report.txt', report);
+  console.log('Report written to itinerary_test_report.txt');
 }
 
 generateReport();

@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://127.0.0.1:5000/api';
 const tripId = 'TEST_TRIP_' + Math.random().toString(36).substring(2, 7).toUpperCase();
 const futureDate = new Date(Date.now() + 7 * 24 * 3600 * 1000).toLocaleDateString('en-CA');
 

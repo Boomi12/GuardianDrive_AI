@@ -14,6 +14,7 @@ import Dashboard from './pages/Dashboard';
 
 // Import Protected Route Guard
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorBoundary from './components/ErrorBoundary';
 
 import './App.css';
 
@@ -302,7 +303,7 @@ const App = () => {
           {/* Protected routes */}
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/vehicle-setup" element={<ProtectedRoute><VehicleSetup /></ProtectedRoute>} />
-          <Route path="/journey" element={<ProtectedRoute><JourneyCompanion /></ProtectedRoute>} />
+          <Route path="/journey" element={<ProtectedRoute><ErrorBoundary><JourneyCompanion /></ErrorBoundary></ProtectedRoute>} />
           <Route path="/itinerary" element={<ProtectedRoute><Itinerary /></ProtectedRoute>} />
           <Route path="/digital-twin" element={<ProtectedRoute><DigitalTwin /></ProtectedRoute>} />
           <Route path="/agents" element={<ProtectedRoute><AgentPanel /></ProtectedRoute>} />

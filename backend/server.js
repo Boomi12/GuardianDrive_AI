@@ -10,6 +10,8 @@ import twinRouter from './routes/twin.js';
 import agentsRouter from './routes/agents.js';
 import authRouter from './routes/auth.js';
 import vehicleRouter from './routes/vehicle.js';
+import mapsRouter from './routes/maps.js';
+import weatherRouter from './routes/weather.js';
 
 // Load environment variables
 dotenv.config();
@@ -41,6 +43,8 @@ app.use('/api/twin', twinRouter);
 app.use('/api/agents', agentsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/vehicle', vehicleRouter);
+app.use('/api/maps', mapsRouter);
+app.use('/api/weather', weatherRouter);
 
 // Health Check API
 app.get('/api/health', (req, res) => {

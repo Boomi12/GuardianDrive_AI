@@ -84,6 +84,59 @@ export const checkPlaceFeasibility = async (tripId, place, time) => {
   }
 };
 
+export const getActiveItinerary = async (userId) => {
+  try {
+    const response = await api.get(`/itinerary/active/${userId}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return { success: false, data: null, message: 'No active trip found' };
+    }
+    console.error('Error fetching active itinerary:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const applyItineraryFix = async (tripId, timeline) => {
+  try {
+    const response = await api.post('/itinerary/apply-fix', { tripId, timeline });
+    return response.data;
+  } catch (error) {
+    console.error('Error applying itinerary fix:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getAutocompletePredictions = async (input) => {
+  try {
+    const response = await api.get('/maps/autocomplete', { params: { input } });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching autocomplete predictions:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getPlaceDetails = async (placeId) => {
+  try {
+    const response = await api.get('/maps/place-details', { params: { placeId } });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching place details:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getCurrentWeather = async (lat, lng, cityName) => {
+  try {
+    const response = await api.get('/weather/current', { params: { lat, lng, cityName } });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching current weather:', error);
+    throw error.response?.data || error.message;
+  }
+};
+
 // Place Recommendations API calls
 export const recommendPlaces = async (preferences) => {
   try {

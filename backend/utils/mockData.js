@@ -2,126 +2,216 @@ export const mockDestinations = {
   mysore: {
     name: "Mysore",
     attractions: [
-      { name: "Mysore Palace", type: "Heritage", location: "Manoj Vihar, Mysore", rating: 4.8, description: "Grand architecture with spectacular Sunday night lighting and historical museum." },
-      { name: "Chamundi Hill Temple", type: "Spiritual", location: "Chamundi Hills", rating: 4.6, description: "Beautiful ancient temple with panoramic city views and a giant Nandi statue." },
-      { name: "Brindavan Gardens", type: "Nature", location: "KRS Dam", rating: 4.3, description: "Scenic terraced gardens featuring colorful musical fountain shows in the evening." }
+      { name: "Mysore Palace", type: "Heritage", location: "Manoj Vihar, Mysore", rating: 4.8, description: "Grand architecture with spectacular Sunday night lighting and historical museum.", openTime: "10:00 AM", closeTime: "05:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Heritage", "Palace", "Architecture", "History", "Royal"] },
+      { name: "Chamundi Hill Temple", type: "Spiritual", location: "Chamundi Hills", rating: 4.6, description: "Beautiful ancient temple with panoramic city views and a giant Nandi statue.", openTime: "07:30 AM", closeTime: "09:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Spiritual", "Temple", "Views", "Heritage"] },
+      { name: "Brindavan Gardens", type: "Nature", location: "KRS Dam", rating: 4.3, description: "Scenic terraced gardens featuring colorful musical fountain shows in the evening.", openTime: "06:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Nature", "Gardens", "Fountains", "Scenic", "Evening"] },
+      { name: "Karanji Lake", type: "Nature", location: "Near Mysore Zoo", rating: 4.4, description: "Serene lake with a walk-through aviary, butterfly park, and boating facilities.", openTime: "08:30 AM", closeTime: "05:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Nature", "Lake", "Birds", "Boating"] },
+      { name: "Mysore Zoo", type: "Nature", location: "Indiranagar", rating: 4.7, description: "One of the oldest and most popular zoos in India, home to a wide variety of species.", openTime: "08:30 AM", closeTime: "05:30 PM", minimumVisitDuration: 90, recommendedVisitDuration: 180, tags: ["Nature", "Wildlife", "Zoo", "Family"] },
+      { name: "Jaganmohan Palace Art Gallery", type: "Heritage", location: "Devaraja Mohalla", rating: 4.2, description: "Historic palace housing a rich collection of traditional South Indian paintings.", openTime: "10:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Heritage", "Art", "Gallery", "History"] },
+      { name: "St. Philomena's Church", type: "Heritage", location: "Lashkar Mohalla", rating: 4.5, description: "Neo-Gothic style cathedral with beautiful stained glass windows and towering spires.", openTime: "08:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Heritage", "Church", "Architecture", "Spiritual"] },
+      { name: "Railway Museum", type: "Educational", location: "Medar Block", rating: 4.1, description: "Outdoor museum displaying vintage locomotives, royal carriages, and railway relics.", openTime: "09:30 AM", closeTime: "05:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Educational", "Museum", "Trains", "Family"] },
+      { name: "GRS Fantasy Park", type: "Adventure", location: "KRS Road", rating: 4.3, description: "Popular amusement and water park featuring thrilling rides and water slides.", openTime: "10:30 AM", closeTime: "06:00 PM", minimumVisitDuration: 120, recommendedVisitDuration: 240, tags: ["Adventure", "Theme Park", "Water Slides", "Thrills"] },
+      { name: "Lalitha Mahal Palace", type: "Heritage", location: "Siddhartha Layout", rating: 4.4, description: "Stunning white palace designed on the lines of St. Paul's Cathedral in London.", openTime: "10:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Heritage", "Palace", "Luxury", "Architecture"] },
+      { name: "Payana Car Museum", type: "Educational", location: "Mysore Road", rating: 4.5, description: "A unique museum showcasing a collection of vintage and classic automobiles.", openTime: "09:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Museum", "Automobile", "Car Museum", "Family"] }
     ],
     restaurants: [
-      { name: "Hotel Mylari", cuisine: "South Indian", location: "Nazarbad", rating: 4.7, budget: "Low" },
-      { name: "Gufha Restaurant", cuisine: "Multi-cuisine", location: "Devaraja Mohalla", rating: 4.2, budget: "Medium" },
-      { name: "The Olive Garden", cuisine: "Italian / Indian", location: "Windflower Resort", rating: 4.5, budget: "High" }
+      { name: "Hotel Mylari", cuisine: "South Indian", location: "Nazarbad", rating: 4.7, budget: "Low", description: "Iconic eatery famous for its fluffy butter dosas served on leaf sheets.", openTime: "07:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Breakfast", "Dosa", "Iconic", "Vegetarian"] },
+      { name: "Gufha Restaurant", cuisine: "Multi-cuisine", location: "Devaraja Mohalla", rating: 4.2, budget: "Medium", description: "Cave-themed multi-cuisine restaurant with unique rocky decor and cozy dining slots.", openTime: "12:00 PM", closeTime: "11:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Cave Theme", "Dinner", "Multi-cuisine", "Ambience"] },
+      { name: "The Olive Garden", cuisine: "Italian / Indian", location: "Windflower Resort", rating: 4.5, budget: "High", description: "Open-air fine dining restaurant nestled within beautiful garden landscapes.", openTime: "11:00 AM", closeTime: "10:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Fine Dining", "Italian", "Indian", "Garden Setting"] },
+      { name: "Oyster Bay", cuisine: "Multi-cuisine", location: "Vijaynagar", rating: 4.3, budget: "Medium", description: "Vibrant place known for delicious seafood, North Indian dishes, and cocktails.", openTime: "11:30 AM", closeTime: "11:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Seafood", "Multi-cuisine", "Cocktails", "Bar"] },
+      { name: "Mahesh Prasad", cuisine: "South Indian", location: "Chamarajapuram", rating: 4.4, budget: "Low", description: "Popular vegetarian restaurant serving authentic Karnataka style tiffin and meals.", openTime: "07:00 AM", closeTime: "09:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Traditional", "Vegetarian", "South Indian", "Fast Service"] },
+      { name: "Parklane Hotel Restaurant", cuisine: "Indian / Continental", location: "Lashkar Mohalla", rating: 4.1, budget: "Medium", description: "Open-air restaurant featuring live musical performances and international cuisine.", openTime: "11:00 AM", closeTime: "11:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Live Music", "Beer", "Indian", "Open Air"] },
+      { name: "Sizzler Bistro", cuisine: "Continental", location: "Gokulam", rating: 4.2, budget: "Medium", description: "Chic cafe and diner specializing in hot sizzlers, pasta, and espresso beverages.", openTime: "12:00 PM", closeTime: "10:30 PM", minimumVisitDuration: 40, recommendedVisitDuration: 60, tags: ["Sizzlers", "Pasta", "Cafe", "Gokulam"] },
+      { name: "Spring at Radisson Blu", cuisine: "Fine Dining", location: "Race Course Road", rating: 4.6, budget: "High", description: "All-day dining venue offering luxurious buffet spreads and ala-carte world cuisine.", openTime: "06:30 AM", closeTime: "11:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Buffet", "Luxury", "Multi-cuisine", "Global"] },
+      { name: "Poojari's Fish Land", cuisine: "Seafood / Coastal", location: "Mysore-Bangalore Road", rating: 4.2, budget: "Medium", description: "Famous highway stop known for coastal Mangalorean fish curries and fries.", openTime: "11:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Seafood", "Mangalorean", "Highway Diner", "Fish Fry"] },
+      { name: "Depth N Green", cuisine: "Cafe / Healthy", location: "Gokulam", rating: 4.5, budget: "Medium", description: "Cozy community cafe serving organic, gluten-free, and vegan snacks and smoothies.", openTime: "08:00 AM", closeTime: "08:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Cafe", "Healthy", "Organic", "Vegan"] }
     ],
     restStops: [
-      { name: "Highway Nest Food Plaza", type: "Food Court", location: "Bangalore-Mysore Expressway", facilities: ["Restrooms", "Fast Food", "Ample Parking"] },
-      { name: "Cafe Coffee Day - Highway Stop", type: "Cafe", location: "Mandya", facilities: ["Clean Restrooms", "Coffee", "AC Lounge"] }
+      { name: "Highway Nest Food Plaza", type: "Food Court", location: "Bangalore-Mysore Expressway", facilities: ["Restrooms", "Fast Food", "Ample Parking"], openTime: "07:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["Expressway Stop", "Food Court", "Restrooms", "Quick Stop"] },
+      { name: "Cafe Coffee Day - Highway Stop", type: "Cafe", location: "Mandya", facilities: ["Clean Restrooms", "Coffee", "AC Lounge"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["24/7", "Cafe", "Coffee", "AC lounge"] },
+      { name: "Kamath Lokaruchi", type: "South Indian Stop", location: "Ramanagara", facilities: ["Premium Restrooms", "Traditional Food", "Play Area"], openTime: "06:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Traditional breakfast", "Premium Restrooms", "Ramanagara"] },
+      { name: "Empire Restaurant - Expressway Halt", type: "Food Court", location: "Maddur", facilities: ["Clean Restrooms", "Non-veg Food", "24/7 Service"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["24/7", "Non-veg", "Restrooms", "Maddur Vada"] },
+      { name: "Maddur Tiffany's", type: "Snack Stop", location: "Maddur", facilities: ["Washrooms", "Local Maddur Vada", "Tea stall"], openTime: "06:30 AM", closeTime: "09:30 PM", minimumVisitDuration: 20, recommendedVisitDuration: 35, tags: ["Local Snacks", "Washrooms", "Tea", "Maddur"] },
+      { name: "Shell Select Fuel & Convenience", type: "Premium Stop", location: "Bidadi", facilities: ["Cleanest Washrooms", "Quick Snacks", "Coffee Maker"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 25, tags: ["Premium Lounge", "24/7", "Shell Select", "Snacks"] },
+      { name: "Shivalli Restaurant Stop", type: "Veg Stop", location: "Channapatna", facilities: ["Restrooms", "Pure Veg meals", "Toy shopping"], openTime: "07:00 AM", closeTime: "10:30 PM", minimumVisitDuration: 25, recommendedVisitDuration: 45, tags: ["Pure Veg", "Restrooms", "Toys", "Channapatna"] },
+      { name: "Adyar Ananda Bhavan (A2B) - Ramanagara", type: "Food Stop", location: "Ramanagara", facilities: ["Clean Restrooms", "Indian Sweets", "Ample Seating"], openTime: "06:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 25, recommendedVisitDuration: 45, tags: ["Veg", "Sweets", "Restrooms", "Fast Service"] },
+      { name: "Polar Bear Ice Cream Sundaes", type: "Dessert Parlor", location: "Mandya", facilities: ["Washrooms", "Ice Creams", "Air Conditioned"], openTime: "11:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 40, tags: ["Desserts", "Ice Cream", "AC", "Kids Friendly"] },
+      { name: "Highway Chai Point", type: "Cafe", location: "Srirangapatna", facilities: ["Restrooms", "Tea & Snacks", "Outdoor seating"], openTime: "06:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Chai", "Quick Bites", "Outdoor Seating", "Tea"] }
     ],
     haltingPlaces: [
-      { name: "The Windflower Resort & Spa", type: "Resort", rating: 4.6, pricePerNight: "₹8,000/night" },
-      { name: "Radisson Blu Plaza Hotel", type: "Luxury", rating: 4.7, pricePerNight: "₹10,500/night" }
+      { name: "The Windflower Resort & Spa", type: "Resort", rating: 4.6, pricePerNight: "₹8,000/night", location: "Siddhartha Layout, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Resort", "Spa", "Luxury", "Nature"] },
+      { name: "Radisson Blu Plaza Hotel", type: "Luxury", rating: 4.7, pricePerNight: "₹10,500/night", location: "Race Course Road, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Hotel", "City Center", "Pool"] },
+      { name: "Grand Mercure Mysore", type: "Premium", rating: 4.5, pricePerNight: "₹7,500/night", location: "Sayyaji Rao Road, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Premium", "Rooftop Pool", "Modern", "Family"] },
+      { name: "Silent Shores Resort & Spa", type: "Resort", rating: 4.6, pricePerNight: "₹9,000/night", location: "Hunsur Road, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Resort", "Lakeview", "Quiet", "Spa"] },
+      { name: "Fortune JP Palace", type: "Heritage Luxury", rating: 4.4, pricePerNight: "₹6,000/night", location: "Nazarbad, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Palace Architecture", "View", "Heritage", "Luxury"] },
+      { name: "Southern Star Mysore", type: "Premium", rating: 4.3, pricePerNight: "₹5,000/night", location: "Vinoba Road, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Premium", "Location", "Garden", "Dining"] },
+      { name: "Roost Guesthouse", type: "Budget Stay", rating: 4.1, pricePerNight: "₹2,500/night", location: "Hunsur Road, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Budget", "Guesthouse", "Backpacker", "Friendly"] },
+      { name: "Country Inn & Suites by Radisson", type: "Premium", rating: 4.4, pricePerNight: "₹5,500/night", location: "Hebbal Industrial Area, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Suites", "Family", "Pool", "Corporate"] },
+      { name: "Ginger Mysore", type: "Budget Hotel", rating: 4.0, pricePerNight: "₹3,000/night", location: "Nazarbad, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Budget", "Clean", "Minimalist", "Business"] },
+      { name: "Lalitha Mahal Palace Hotel", type: "Heritage Luxury", rating: 4.7, pricePerNight: "₹12,000/night", location: "Siddhartha Layout, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Heritage Palace", "Luxury", "Royal Experience", "Iconic"] }
     ],
     fuelChargingStops: [
-      { name: "Tata Power EV Fast Charger", type: "EV", status: "Active", location: "Radisson Blu Parking" },
-      { name: "HP CL Petrol Pump - Mysore Road", type: "Fuel", status: "Active", location: "Mysore Bypass" }
+      { name: "Tata Power EV Fast Charger", type: "EV", status: "Active", location: "Radisson Blu Parking, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Fast Charger", "Tata Power", "24/7"] },
+      { name: "HP CL Petrol Pump - Mysore Road", type: "Fuel", status: "Active", location: "Mysore Bypass", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "Petrol", "Diesel", "HPCL", "24/7"] },
+      { name: "Zeon EV Charging Station - Mall of Mysore", type: "EV", status: "Active", location: "Mall of Mysore Parking", openTime: "10:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Zeon", "Fast Charger", "Mall Location"] },
+      { name: "Jio-bp Pulse EV Station", type: "EV", status: "Active", location: "Hebbal Industrial Area, Mysore", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Jio-bp", "DC Fast Charger"] },
+      { name: "Shell Fuel Station - Ring Road", type: "Fuel", status: "Active", location: "Mysore Outer Ring Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "Shell", "Nitrogen Air", "Premium Fuel"] },
+      { name: "Indian Oil Petrol Pump - City Center", type: "Fuel", status: "Active", location: "Near Palace Main Gate", openTime: "06:00 AM", closeTime: "11:30 PM", minimumVisitDuration: 5, recommendedVisitDuration: 15, tags: ["Fuel", "IOCL", "City Center", "Air Station"] },
+      { name: "Bharat Petroleum Fast EV Station", type: "EV", status: "Active", location: "Mysore-Bangalore Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "BPCL", "Expressway Entrance", "24/7"] },
+      { name: "Ather Grid Fast Charger - Gokulam", type: "EV", status: "Active", location: "Loyal World Supermarket, Gokulam", openTime: "08:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["EV", "Two-wheeler Charger", "Ather Grid", "Gokulam"] },
+      { name: "Nayara Energy Fuel Station", type: "Fuel", status: "Active", location: "Mysore Bypass North", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "Nayara", "Bypass", "Diesel Focus"] },
+      { name: "Relux EV Charging Hub", type: "EV", status: "Active", location: "Silent Shores Resort Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Relux", "Resort Parking", "24/7"] }
     ]
   },
   coorg: {
     name: "Coorg",
     attractions: [
-      { name: "Abbey Falls", type: "Nature", location: "Madikeri", rating: 4.5, description: "Stunning waterfall nestled inside lush coffee plantations and spice gardens." },
-      { name: "Raja's Seat", type: "Scenic Viewpoint", location: "Madikeri", rating: 4.4, description: "Historic seasonal garden and sunset viewpoint of the misty Coorg valleys." },
-      { name: "Namdroling Golden Temple", type: "Spiritual", location: "Bylakuppe", rating: 4.8, description: "Large Tibetan settlement with magnificent golden Buddha statues and temple complex." }
+      { name: "Abbey Falls", type: "Nature", location: "Madikeri", rating: 4.5, description: "Stunning waterfall nestled inside lush coffee plantations and spice gardens.", openTime: "09:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Nature", "Waterfall", "Sightseeing"] },
+      { name: "Raja's Seat", type: "Scenic Viewpoint", location: "Madikeri", rating: 4.4, description: "Historic seasonal garden and sunset viewpoint of the misty Coorg valleys.", openTime: "06:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Scenic", "Sunset", "Gardens"] },
+      { name: "Namdroling Golden Temple", type: "Spiritual", location: "Bylakuppe", rating: 4.8, description: "Large Tibetan settlement with magnificent golden Buddha statues and temple complex.", openTime: "09:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Spiritual", "Temple", "Culture"] }
     ],
     restaurants: [
-      { name: "Coorg Cuisine", cuisine: "Kodava Local", location: "Madikeri", rating: 4.6, budget: "Medium" },
-      { name: "Raintree Restaurant", cuisine: "Fine Dining / Local", location: "Madikeri", rating: 4.3, budget: "High" },
-      { name: "East End Hotel", cuisine: "Biryani / South Indian", location: "Madikeri", rating: 4.1, budget: "Low" }
+      { name: "Coorg Cuisine", cuisine: "Kodava Local", location: "Madikeri", rating: 4.6, budget: "Medium", openTime: "12:00 PM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 50, tags: ["Local Food", "Kodava", "Lunch"] },
+      { name: "Raintree Restaurant", cuisine: "Fine Dining / Local", location: "Madikeri", rating: 4.3, budget: "High", openTime: "12:00 PM", closeTime: "10:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Fine Dining", "Outdoor"] },
+      { name: "East End Hotel", cuisine: "Biryani / South Indian", location: "Madikeri", rating: 4.1, budget: "Low", openTime: "11:30 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Biryani", "South Indian"] }
     ],
     restStops: [
-      { name: "Coorg Spices Hub & Cafe", type: "Rest Stop", location: "Kushalnagar", facilities: ["Restrooms", "Spice Shopping", "Tea & Snacks"] },
-      { name: "Cafe Coffee Day", type: "Cafe", location: "Suntikoppa", facilities: ["Clean Washrooms", "Parking", "WiFi"] }
+      { name: "Coorg Spices Hub & Cafe", type: "Rest Stop", location: "Kushalnagar", facilities: ["Restrooms", "Spice Shopping", "Tea & Snacks"], openTime: "08:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["Spices", "Tea"] },
+      { name: "Cafe Coffee Day", type: "Cafe", location: "Suntikoppa", facilities: ["Clean Washrooms", "Parking", "WiFi"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Coffee", "24/7"] }
     ],
     haltingPlaces: [
-      { name: "The Tamara Coorg", type: "Luxury Resort", rating: 4.9, pricePerNight: "₹18,000/night" },
-      { name: "Club Mahindra Madikeri", type: "Family Resort", rating: 4.5, pricePerNight: "₹9,500/night" }
+      { name: "The Tamara Coorg", type: "Luxury Resort", rating: 4.9, pricePerNight: "₹18,000/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Resort"] },
+      { name: "Club Mahindra Madikeri", type: "Family Resort", rating: 4.5, pricePerNight: "₹9,500/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Resort", "Family"] }
     ],
     fuelChargingStops: [
-      { name: "Zeon EV Charging Station", type: "EV", status: "Active", location: "Club Mahindra Parking" },
-      { name: "Indian Oil Petrol Station", type: "Fuel", status: "Active", location: "Madikeri Main Road" }
+      { name: "Zeon EV Charging Station", type: "EV", status: "Active", location: "Club Mahindra Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Zeon"] },
+      { name: "Indian Oil Petrol Station", type: "Fuel", status: "Active", location: "Madikeri Main Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "IOCL"] }
     ]
   },
   bangalore: {
     name: "Bangalore",
     attractions: [
-      { name: "Lalbagh Botanical Garden", type: "Nature", location: "Mavalli", rating: 4.5, description: "Historic 240-acre botanical garden featuring a majestic Victorian glasshouse." },
-      { name: "Bangalore Palace", type: "Heritage", location: "Vasanth Nagar", rating: 4.4, description: "Tudor-style royal estate with grand wood-carved interiors and beautiful gardens." },
-      { name: "Nandi Hills", type: "Scenic Viewpoint", location: "Chikkaballapur", rating: 4.6, description: "A popular mountaintop fortress offering breathtaking sunrise and sea-of-clouds views." }
+      { name: "Lalbagh Botanical Garden", type: "Nature", location: "Mavalli", rating: 4.5, description: "Historic 240-acre botanical garden featuring a majestic Victorian glasshouse.", openTime: "06:00 AM", closeTime: "07:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Nature", "Garden"] },
+      { name: "Bangalore Palace", type: "Heritage", location: "Vasanth Nagar", rating: 4.4, description: "Tudor-style royal estate with grand wood-carved interiors and beautiful gardens.", openTime: "10:00 AM", closeTime: "05:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Heritage", "Palace"] },
+      { name: "Nandi Hills", type: "Scenic Viewpoint", location: "Chikkaballapur", rating: 4.6, description: "A popular mountaintop fortress offering breathtaking sunrise and sea-of-clouds views.", openTime: "06:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 90, recommendedVisitDuration: 120, tags: ["Scenic", "Sunrise"] }
     ],
     restaurants: [
-      { name: "Vidyarthi Bhavan", cuisine: "South Indian", location: "Basavanagudi", rating: 4.6, budget: "Low" },
-      { name: "Toit Brewpub", cuisine: "Continental / Brewery", location: "Indiranagar", rating: 4.5, budget: "High" },
-      { name: "Nagarjuna Restaurant", cuisine: "Andhra Style", location: "Residency Road", rating: 4.3, budget: "Medium" }
+      { name: "Vidyarthi Bhavan", cuisine: "South Indian", location: "Basavanagudi", rating: 4.6, budget: "Low", openTime: "06:30 AM", closeTime: "11:30 AM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Dosa", "Iconic"] },
+      { name: "Toit Brewpub", cuisine: "Continental / Brewery", location: "Indiranagar", rating: 4.5, budget: "High", openTime: "12:00 PM", closeTime: "11:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Brewery", "Pizza"] },
+      { name: "Nagarjuna Restaurant", cuisine: "Andhra Style", location: "Residency Road", rating: 4.3, budget: "Medium", openTime: "12:00 PM", closeTime: "04:00 PM", minimumVisitDuration: 40, recommendedVisitDuration: 60, tags: ["Biryani", "Andhra Meal"] }
     ],
     restStops: [
-      { name: "Shell Select Lounge", type: "Premium Stop", location: "Devenahalli", facilities: ["24/7 Snacks", "Ultra Clean Washrooms", "Air & Water Station"] },
-      { name: "A2B Adyar Ananda Bhavan", type: "Veg Restaurant Stop", location: "Bangalore Outer Ring", facilities: ["Restrooms", "Fast Service", "Clean dining"] }
+      { name: "Shell Select Lounge", type: "Premium Stop", location: "Devenahalli", facilities: ["24/7 Snacks", "Ultra Clean Washrooms", "Air & Water Station"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Shell", "24/7"] },
+      { name: "A2B Adyar Ananda Bhavan", type: "Veg Restaurant Stop", location: "Bangalore Outer Ring", facilities: ["Restrooms", "Fast Service", "Clean dining"], openTime: "06:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 20, recommendedVisitDuration: 35, tags: ["Veg", "Restrooms"] }
     ],
     haltingPlaces: [
-      { name: "Taj West End", type: "Luxury Heritage", rating: 4.8, pricePerNight: "₹22,000/night" },
-      { name: "ITC Gardenia", type: "Luxury", rating: 4.7, pricePerNight: "₹16,000/night" }
+      { name: "Taj West End", type: "Luxury Heritage", rating: 4.8, pricePerNight: "₹22,000/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Heritage"] },
+      { name: "ITC Gardenia", type: "Luxury", rating: 4.7, pricePerNight: "₹16,000/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Green"] }
     ],
     fuelChargingStops: [
-      { name: "BESCOM Fast EV Charger", type: "EV", status: "Active", location: "Kanakapura Road Metro Station" },
-      { name: "Shell Fuel Station - Indiranagar", type: "Fuel", status: "Active", location: "100 Feet Road" }
+      { name: "BESCOM Fast EV Charger", type: "EV", status: "Active", location: "Kanakapura Road Metro Station", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "BESCOM"] },
+      { name: "Shell Fuel Station - Indiranagar", type: "Fuel", status: "Active", location: "100 Feet Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "Shell"] }
     ]
   },
   chikkamagaluru: {
     name: "Chikkamagaluru",
     attractions: [
-      { name: "Mullayanagiri Peak", type: "Adventure / Scenic", location: "Baba Budan Range", rating: 4.7, description: "Highest peak in Karnataka featuring hiking trails amidst mist-laden coffee valleys." },
-      { name: "Hebbe Falls", type: "Nature", location: "Kemmangundi", rating: 4.5, description: "Enchanting forest waterfall flowing in two stages, accessible via adventurous forest jeep ride." },
-      { name: "Baba Budangiri", type: "Spiritual / Scenic", location: "Baba Budan Range", rating: 4.4, description: "Historic mountain shrine sacred to both Hindus and Muslims, offering scenic views." }
+      { name: "Mullayanagiri Peak", type: "Adventure / Scenic", location: "Baba Budan Range", rating: 4.7, description: "Highest peak in Karnataka featuring hiking trails amidst mist-laden coffee valleys.", openTime: "06:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Scenic", "Adventure"] },
+      { name: "Hebbe Falls", type: "Nature", location: "Kemmangundi", rating: 4.5, description: "Enchanting forest waterfall flowing in two stages, accessible via adventurous forest jeep ride.", openTime: "08:00 AM", closeTime: "04:00 PM", minimumVisitDuration: 90, recommendedVisitDuration: 120, tags: ["Nature", "Waterfall"] },
+      { name: "Baba Budangiri", type: "Spiritual / Scenic", location: "Baba Budan Range", rating: 4.4, description: "Historic mountain shrine sacred to both Hindus and Muslims, offering scenic views.", openTime: "08:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Spiritual", "Scenic"] }
     ],
     restaurants: [
-      { name: "Town House Restaurant", cuisine: "South Indian", location: "Main Road", rating: 4.1, budget: "Low" },
-      { name: "The Peeriot", cuisine: "Indian & Continental", location: "Kadur Road", rating: 4.3, budget: "Medium" },
-      { name: "Odyssey Restaurant", cuisine: "Multi-cuisine", location: "The Serai Resort", rating: 4.6, budget: "High" }
+      { name: "Town House Restaurant", cuisine: "South Indian", location: "Main Road", rating: 4.1, budget: "Low", openTime: "07:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["South Indian", "Veg"] },
+      { name: "The Peeriot", cuisine: "Indian & Continental", location: "Kadur Road", rating: 4.3, budget: "Medium", openTime: "11:00 AM", closeTime: "10:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Multi-cuisine"] },
+      { name: "Odyssey Restaurant", cuisine: "Multi-cuisine", location: "The Serai Resort", rating: 4.6, budget: "High", openTime: "12:00 PM", closeTime: "10:30 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Fine Dining"] }
     ],
     restStops: [
-      { name: "CCD - Global Village Road", type: "Cafe", location: "Chikkamagaluru Entry", facilities: ["Washrooms", "Premium Coffee", "Green Lounge"] },
-      { name: "Hassan Highway Food Plaza", type: "Food Stop", location: "Hassan Bypass", facilities: ["Clean Restrooms", "Veg Restaurants", "Parking"] }
+      { name: "CCD - Global Village Road", type: "Cafe", location: "Chikkamagaluru Entry", facilities: ["Washrooms", "Premium Coffee", "Green Lounge"], openTime: "07:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 30, tags: ["Coffee"] },
+      { name: "Hassan Highway Food Plaza", type: "Food Stop", location: "Hassan Bypass", facilities: ["Clean Restrooms", "Veg Restaurants", "Parking"], openTime: "06:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 25, recommendedVisitDuration: 35, tags: ["Veg", "Restrooms"] }
     ],
     haltingPlaces: [
-      { name: "The Serai Chikkamagaluru", type: "Luxury Resort", rating: 4.7, pricePerNight: "₹16,500/night" },
-      { name: "Trivik Hotels & Resorts", type: "Luxury Resort", rating: 4.8, pricePerNight: "₹14,500/night" }
+      { name: "The Serai Chikkamagaluru", type: "Luxury Resort", rating: 4.7, pricePerNight: "₹16,500/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Resort"] },
+      { name: "Trivik Hotels & Resorts", type: "Luxury Resort", rating: 4.8, pricePerNight: "₹14,500/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Resort"] }
     ],
     fuelChargingStops: [
-      { name: "Ather Grid EV Charger", type: "EV", status: "Active", location: "Town Center Parking" },
-      { name: "HP Petrol Pump", type: "Fuel", status: "Active", location: "Chikkamagaluru Bypass" }
+      { name: "Ather Grid EV Charger", type: "EV", status: "Active", location: "Town Center Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["EV", "Ather"] },
+      { name: "HP Petrol Pump", type: "Fuel", status: "Active", location: "Chikkamagaluru Bypass", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "HP"] }
     ]
   },
   ooty: {
     name: "Ooty",
     attractions: [
-      { name: "Ooty Botanical Gardens", type: "Nature", location: "Ooty Town", rating: 4.5, description: "Lush terraced lawns, exotic plant species, and a 20-million-year-old fossilized tree trunk." },
-      { name: "Doddabetta Peak", type: "Scenic Viewpoint", location: "Kotagiri Road", rating: 4.3, description: "Highest point in the Nilgiri hills with a telescope observatory house for valley views." },
-      { name: "Ooty Lake", type: "Nature", location: "Lake Road", rating: 4.1, description: "Picturesque lake offering motor and row boat rentals surrounded by tall eucalyptus trees." }
+      { name: "Ooty Botanical Gardens", type: "Nature", location: "Ooty Town", rating: 4.5, description: "Lush terraced lawns, exotic plant species, and a 20-million-year-old fossilized tree trunk.", openTime: "07:00 AM", closeTime: "06:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Nature", "Garden"] },
+      { name: "Doddabetta Peak", type: "Scenic Viewpoint", location: "Kotagiri Road", rating: 4.3, description: "Highest point in the Nilgiri hills with a telescope observatory house for valley views.", openTime: "09:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Scenic", "Observatory"] },
+      { name: "Ooty Lake", type: "Nature", location: "Lake Road", rating: 4.1, description: "Picturesque lake offering motor and row boat rentals surrounded by tall eucalyptus trees.", openTime: "09:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Nature", "Lake"] }
     ],
     restaurants: [
-      { name: "Shinkows Chinese Restaurant", cuisine: "Authentic Chinese", location: "Commissioner Road", rating: 4.5, budget: "Medium" },
-      { name: "Place to Bee", cuisine: "Italian / Cafe", location: "Club Road", rating: 4.4, budget: "Medium" },
-      { name: "Earl's Secret", cuisine: "Anglo-Indian / Continental", location: "King's Cliff", rating: 4.6, budget: "High" }
+      { name: "Shinkows Chinese Restaurant", cuisine: "Authentic Chinese", location: "Commissioner Road", rating: 4.5, budget: "Medium", openTime: "11:30 AM", closeTime: "10:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 60, tags: ["Chinese", "Authentic"] },
+      { name: "Place to Bee", cuisine: "Italian / Cafe", location: "Club Road", rating: 4.4, budget: "Medium", openTime: "11:00 AM", closeTime: "09:30 PM", minimumVisitDuration: 40, recommendedVisitDuration: 50, tags: ["Italian", "Cafe"] },
+      { name: "Earl's Secret", cuisine: "Anglo-Indian / Continental", location: "King's Cliff", rating: 4.6, budget: "High", openTime: "12:00 PM", closeTime: "10:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 75, tags: ["Anglo-Indian", "Luxury"] }
     ],
     restStops: [
-      { name: "Hill View Tea Stop", type: "Tea Shop", location: "Coonoor Road", facilities: ["Restrooms", "Scenic Seating", "Local Tea & Chocolates"] },
-      { name: "Nilgiri Highway Nest", type: "Food Plaza", location: "Mettupalayam-Ooty Road", facilities: ["Washrooms", "Tea stall", "Ample parking"] }
+      { name: "Hill View Tea Stop", type: "Tea Shop", location: "Coonoor Road", facilities: ["Restrooms", "Scenic Seating", "Local Tea & Chocolates"], openTime: "07:00 AM", closeTime: "07:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 25, tags: ["Tea", "Chocolates"] },
+      { name: "Nilgiri Highway Nest", type: "Food Plaza", location: "Mettupalayam-Ooty Road", facilities: ["Washrooms", "Tea stall", "Ample parking"], openTime: "06:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 30, tags: ["Snacks", "Washrooms"] }
     ],
     haltingPlaces: [
-      { name: "Savoy - IHCL SeleQtions", type: "Heritage Luxury", rating: 4.7, pricePerNight: "₹14,000/night" },
-      { name: "Destiny The Farmstay", type: "Resort", rating: 4.5, pricePerNight: "₹9,000/night" }
+      { name: "Savoy - IHCL SeleQtions", type: "Heritage Luxury", rating: 4.7, pricePerNight: "₹14,000/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Heritage"] },
+      { name: "Destiny The Farmstay", type: "Resort", rating: 4.5, pricePerNight: "₹9,000/night", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Resort", "Farmstay"] }
     ],
     fuelChargingStops: [
-      { name: "Tata Power Fast EV Charger", type: "EV", status: "Active", location: "Savoy Hotel Parking" },
-      { name: "Bharat Petroleum Pump", type: "Fuel", status: "Active", location: "Ooty-Coonoor Highway" }
+      { name: "Tata Power Fast EV Charger", type: "EV", status: "Active", location: "Savoy Hotel Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Tata"] },
+      { name: "Bharat Petroleum Pump", type: "Fuel", status: "Active", location: "Ooty-Coonoor Highway", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "BPCL"] }
+    ]
+  },
+  chennai: {
+    name: "Chennai",
+    attractions: [
+      { name: "Marina Beach", type: "Nature", location: "Marina Beach Road, Chennai", rating: 4.6, description: "One of the longest urban beaches in the world, perfect for strolls and sunsets.", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Nature", "Beach", "Sea", "Scenic"] },
+      { name: "Kapaleeshwarar Temple", type: "Spiritual", location: "Mylapore, Chennai", rating: 4.7, description: "7th-century Dravidian heritage Hindu temple dedicated to Shiva.", openTime: "06:00 AM", closeTime: "09:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Spiritual", "Temple", "Heritage"] },
+      { name: "Fort St. George", type: "Heritage", location: "Rajaji Salai, Chennai", rating: 4.4, description: "First English fortress in India, built in 1644, containing a museum.", openTime: "09:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Heritage", "Museum", "History"] },
+      { name: "Government Museum Chennai", type: "Educational", location: "Egmore, Chennai", rating: 4.3, description: "Huge museum complex holding rare archaeological findings and artwork.", openTime: "09:30 AM", closeTime: "05:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Educational", "Museum", "History", "Gallery"] },
+      { name: "Santhome Basilica", type: "Heritage", location: "Santhome High Road, Chennai", rating: 4.5, description: "Stunning neo-Gothic Catholic basilica built over the tomb of St. Thomas.", openTime: "06:00 AM", closeTime: "09:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Heritage", "Church", "Spiritual"] },
+      { name: "Valluvar Kottam", type: "Heritage", location: "Nungambakkam, Chennai", rating: 4.2, description: "Chariot-shaped monument dedicated to the classical Tamil poet Thiruvalluvar.", openTime: "08:30 AM", closeTime: "05:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Heritage", "Monument"] },
+      { name: "Guindy National Park", type: "Nature", location: "Guindy, Chennai", rating: 4.3, description: "One of the few national parks situated inside a metropolitan city.", openTime: "09:00 AM", closeTime: "05:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Nature", "Park", "Wildlife"] },
+      { name: "Besant Nagar Beach", type: "Nature", location: "Besant Nagar, Chennai", rating: 4.5, description: "A clean and peaceful beach popular for evening walks and street food.", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Nature", "Beach", "Sea", "Sunset"] },
+      { name: "DakshinaChitra", type: "Culture", location: "East Coast Road, Chennai", rating: 4.6, description: "Living history museum celebrating South Indian heritage, crafts, and homes.", openTime: "10:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 90, recommendedVisitDuration: 180, tags: ["Culture", "Museum", "Bazaar"] },
+      { name: "Arignar Anna Zoological Park", type: "Nature", location: "Vandalur, Chennai", rating: 4.4, description: "Large zoological garden housing rich species of mammals, birds, and reptiles.", openTime: "09:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 120, recommendedVisitDuration: 240, tags: ["Nature", "Zoo", "Wildlife", "Family", "Kids"] }
+    ],
+    restaurants: [
+      { name: "Murugan Idli Shop", cuisine: "South Indian", location: "T. Nagar, Chennai", rating: 4.5, budget: "Low", description: "Famous place for soft idlis, sweet pongal, and aromatic filter coffee.", openTime: "07:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Breakfast", "Idli", "Vegetarian", "Pure Veg", "South Indian"] },
+      { name: "Ratna Cafe", cuisine: "South Indian", location: "Triplicane, Chennai", rating: 4.3, budget: "Low", description: "Iconic restaurant known for unlimited sambar served with hot idlis.", openTime: "06:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Breakfast", "Sambar", "Vegetarian", "Pure Veg", "South Indian"] },
+      { name: "Mathsya", cuisine: "Multi-cuisine", location: "Egmore, Chennai", rating: 4.4, budget: "Medium", description: "Classic vegetarian dining place famous for North and South Indian meals.", openTime: "07:00 AM", closeTime: "11:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Vegetarian", "Pure Veg", "Dinner"] },
+      { name: "Sangeetha Veg Restaurant", cuisine: "South Indian", location: "Mylapore, Chennai", rating: 4.4, budget: "Low", description: "Highly popular chain serving consistent South Indian tiffin meals.", openTime: "06:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Breakfast", "Vegetarian", "Pure Veg", "South Indian"] },
+      { name: "Annalakshmi", cuisine: "Fine Dining Veg", location: "Egmore, Chennai", rating: 4.7, budget: "High", description: "Premium volunteer-run dining serving delicious and pure traditional thalis.", openTime: "12:00 PM", closeTime: "09:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Fine Dining", "Vegetarian", "Pure Veg"] },
+      { name: "Southern Spice", cuisine: "Fine Dining Traditional", location: "Taj Coromandel, Chennai", rating: 4.8, budget: "High", description: "Award-winning fine dining celebrating culinary legends of South India.", openTime: "12:30 PM", closeTime: "11:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Fine Dining", "Heritage", "Luxury"] },
+      { name: "Ponnusamy Hotel", cuisine: "Chettinad", location: "Nungambakkam, Chennai", rating: 4.1, budget: "Medium", description: "Legendary restaurant serving spicy, authentic non-vegetarian Chettinad dishes.", openTime: "11:30 AM", closeTime: "11:00 PM", minimumVisitDuration: 40, recommendedVisitDuration: 60, tags: ["Chettinad", "Spicy", "Non-veg"] },
+      { name: "The Marina", cuisine: "Seafood", location: "Nungambakkam, Chennai", rating: 4.4, budget: "High", description: "Interactive fresh seafood display where you choose raw catch to be cooked.", openTime: "12:00 PM", closeTime: "11:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Seafood", "Fine Dining"] },
+      { name: "Buhari", cuisine: "Biryani", location: "Mount Road, Chennai", rating: 4.2, budget: "Medium", description: "Historical creator of the famous Chicken 65 dish and traditional biryani.", openTime: "11:00 AM", closeTime: "11:30 PM", minimumVisitDuration: 40, recommendedVisitDuration: 60, tags: ["Biryani", "Chicken 65"] },
+      { name: "Adyar Ananda Bhavan", cuisine: "South Indian", location: "Adyar, Chennai", rating: 4.3, budget: "Low", description: "Popular sweets and pure vegetarian chain restaurant.", openTime: "06:30 AM", closeTime: "10:30 PM", minimumVisitDuration: 25, recommendedVisitDuration: 45, tags: ["Sweets", "Vegetarian", "Pure Veg", "South Indian"] }
+    ],
+    restStops: [
+      { name: "Cafe Coffee Day", type: "Cafe", location: "ECR Highway", facilities: ["Clean Restrooms", "Coffee", "AC Lounge"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Coffee", "24/7", "Washrooms"] },
+      { name: "Writer’s Cafe", type: "Cafe", location: "Gopalapuram, Chennai", facilities: ["Books", "Bakery", "Restrooms"], openTime: "09:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["Cafe", "Bakery"] },
+      { name: "Amethyst Cafe", type: "Premium Stop", location: "Royapettah, Chennai", facilities: ["Boutique", "AC Lounge", "GardenSetting"], openTime: "07:30 AM", closeTime: "11:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Premium Lounge", "GardenSetting"] },
+      { name: "Sandy’s Chocolate Laboratory", type: "Dessert Stop", location: "Nungambakkam, Chennai", facilities: ["Desserts", "AC", "Washrooms"], openTime: "11:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 25, recommendedVisitDuration: 45, tags: ["Dessert", "Chocolate"] },
+      { name: "A2B Highway Stop", type: "Veg Stop", location: "OMR Expressway", facilities: ["Restrooms", "Fast Veg tiffin", "Parking"], openTime: "06:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 40, tags: ["Veg", "Restrooms"] }
+    ],
+    haltingPlaces: [
+      { name: "Taj Coromandel", type: "Luxury", rating: 4.8, pricePerNight: "₹12,500/night", location: "Nungambakkam, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Hotel", "Pool"] },
+      { name: "ITC Grand Chola", type: "Luxury", rating: 4.9, pricePerNight: "₹15,000/night", location: "Guindy, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Hotel", "Spa"] },
+      { name: "Radisson Blu Chennai", type: "Premium", rating: 4.4, pricePerNight: "₹8,000/night", location: "GST Road, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Premium", "Airport Hotel"] },
+      { name: "The Park Chennai", type: "Premium", rating: 4.3, pricePerNight: "₹7,000/night", location: "Anna Salai, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Premium", "Boutique"] },
+      { name: "Hyatt Regency Chennai", type: "Luxury", rating: 4.5, pricePerNight: "₹9,000/night", location: "Anna Salai, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Hotel"] },
+      { name: "Ginger Chennai", type: "Budget", rating: 4.0, pricePerNight: "₹3,200/night", location: "IITM Research Park, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Budget", "Business"] },
+      { name: "FabHotel options", type: "Budget", rating: 4.1, pricePerNight: "₹2,000/night", location: "T. Nagar, Chennai", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Budget", "Guesthouse"] }
+    ],
+    fuelChargingStops: [
+      { name: "Tata Power EV Charging", type: "EV", status: "Active", location: "ITC Grand Chola Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Tata Power", "Fast Charger"] },
+      { name: "Statiq EV Charging", type: "EV", status: "Active", location: "Hyatt Regency Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Statiq"] },
+      { name: "Ather Grid Chennai", type: "EV", status: "Active", location: "Amethyst Cafe Parking", openTime: "08:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["EV", "Two-wheeler"] },
+      { name: "IndianOil", type: "Fuel", status: "Active", location: "Egmore Hub", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "IOCL"] },
+      { name: "Bharat Petroleum", type: "Fuel", status: "Active", location: "OMR Expressway Outlet", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "BPCL"] },
+      { name: "HP Petrol Pump", type: "Fuel", status: "Active", location: "Nungambakkam High Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "HPCL"] }
     ]
   }
 };
@@ -129,21 +219,63 @@ export const mockDestinations = {
 export const defaultMockDestination = {
   name: "General Destination",
   attractions: [
-    { name: "Scenic City viewpoint", type: "Scenic", location: "City Center", rating: 4.2, description: "Overlooks the city skyline, perfect for photography." },
-    { name: "Public Historic Park", type: "Nature", location: "Down Town", rating: 4.4, description: "Historic park with walking paths and local vendor stalls." }
+    { name: "Scenic City viewpoint", type: "Scenic", location: "City Center", rating: 4.2, description: "Overlooks the city skyline, perfect for photography.", openTime: "06:00 AM", closeTime: "09:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Scenic", "Viewpoint"] },
+    { name: "Public Historic Park", type: "Nature", location: "Down Town", rating: 4.4, description: "Historic park with walking paths and local vendor stalls.", openTime: "06:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Nature", "Park"] },
+    { name: "Central Science Museum", type: "Educational", location: "Knowledge Center", rating: 4.5, description: "Interactive science exhibits and planetarium shows.", openTime: "10:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Museum", "Science", "Kids"] },
+    { name: "National Art Gallery", type: "Heritage", location: "Cultural Circle", rating: 4.3, description: "Collection of contemporary and historical art pieces.", openTime: "10:00 AM", closeTime: "05:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Art", "Gallery", "Heritage"] },
+    { name: "Botanical Conservatory", type: "Nature", location: "Green Belt", rating: 4.4, description: "Indoor glass dome housing tropical plants and orchids.", openTime: "09:00 AM", closeTime: "06:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Nature", "Greenhouse"] },
+    { name: "Sunset Hill Fort", type: "Adventure", location: "West Hills", rating: 4.6, description: "Old ruins on a hill offering excellent hiking trails and sunsets.", openTime: "06:00 AM", closeTime: "07:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Adventure", "Sunset", "Fort"] },
+    { name: "Crafts Village Bazaar", type: "Culture", location: "East Gate", rating: 4.1, description: "Open-air market displaying local handicrafts and live pottery shows.", openTime: "11:00 AM", closeTime: "08:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 90, tags: ["Shopping", "Culture", "Bazaar"] },
+    { name: "Aquarium World", type: "Nature", location: "Marine Drive", rating: 4.3, description: "Large aquarium displaying exotic fish and an underwater tunnel.", openTime: "09:30 AM", closeTime: "06:00 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Wildlife", "Aquarium", "Family"] },
+    { name: "War Memorial Arch", type: "Heritage", location: "Royal Avenue", rating: 4.2, description: "A grand arch dedicated to soldiers with an eternal flame.", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Heritage", "Memorial", "24/7"] },
+    { name: "Amusement Pier", type: "Adventure", location: "Harbor Boulevard", rating: 4.4, description: "Classic boardwalk featuring a giant ferris wheel and arcade games.", openTime: "12:00 PM", closeTime: "10:00 PM", minimumVisitDuration: 90, recommendedVisitDuration: 180, tags: ["Theme Park", "Boardwalk", "Games"] }
   ],
   restaurants: [
-    { name: "Highway Diner", cuisine: "Multi-cuisine", location: "Highway Junction", rating: 4.1, budget: "Medium" },
-    { name: "Central Veg Plaza", cuisine: "South Indian", location: "Central Market", rating: 4.3, budget: "Low" }
+    { name: "Highway Diner", cuisine: "Multi-cuisine", location: "Highway Junction", rating: 4.1, budget: "Medium", description: "24/7 road trip classic diner offering burgers, shakes, and Indian items.", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Diner", "24/7", "Burger", "Shake"] },
+    { name: "Central Veg Plaza", cuisine: "South Indian", location: "Central Market", rating: 4.3, budget: "Low", description: "Clean vegetarian restaurant with delicious thali and hot filter coffee.", openTime: "07:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 45, tags: ["Vegetarian", "South Indian", "Fast Service"] },
+    { name: "Royal Tandoori House", cuisine: "North Indian", location: "Mall Road", rating: 4.2, budget: "Medium", description: "Famous for kebabs, butter chicken, and fresh tandoori roti.", openTime: "12:00 PM", closeTime: "11:00 PM", minimumVisitDuration: 40, recommendedVisitDuration: 60, tags: ["North Indian", "Kebabs", "Lunch"] },
+    { name: "Cafe Bistro", cuisine: "Italian / Cafe", location: "High Street", rating: 4.4, budget: "Medium", description: "Charming bistro serving wood-fired pizzas, garlic breads, and coffee.", openTime: "10:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 60, tags: ["Cafe", "Pizza", "Italian"] },
+    { name: "Spice Route Seafood", cuisine: "Coastal", location: "Marine Drive", rating: 4.3, budget: "High", description: "Upscale waterfront dining featuring fresh catch of the day.", openTime: "12:00 PM", closeTime: "11:00 PM", minimumVisitDuration: 45, recommendedVisitDuration: 75, tags: ["Seafood", "Fine Dining", "Waterfront"] },
+    { name: "Noodle Wok", cuisine: "Chinese", location: "Metro Mall", rating: 4.0, budget: "Low", description: "Quick-service noodle box and momo counter with spicy sauces.", openTime: "11:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 35, tags: ["Chinese", "Fast Food", "Momos"] },
+    { name: "Green Leaf Organics", cuisine: "Salads / Vegan", location: "Health Enclave", rating: 4.5, budget: "High", description: "Premium health cafe with keto-friendly bowls and green juices.", openTime: "08:00 AM", closeTime: "09:00 PM", minimumVisitDuration: 30, recommendedVisitDuration: 50, tags: ["Healthy", "Vegan", "Organic"] },
+    { name: "The Steakhouse", cuisine: "American Grill", location: "Hotel Row", rating: 4.6, budget: "High", description: "Elegant grill room famous for prime cuts, sides, and fine wine.", openTime: "05:00 PM", closeTime: "11:30 PM", minimumVisitDuration: 60, recommendedVisitDuration: 90, tags: ["Steakhouse", "Fine Dining", "Wine"] },
+    { name: "Local Sweet House", cuisine: "Sweets & Snacks", location: "Old Bazaar", rating: 4.2, budget: "Low", description: "Famous local confectionery selling traditional sweets, samosas, and tea.", openTime: "08:00 AM", closeTime: "09:30 PM", minimumVisitDuration: 20, recommendedVisitDuration: 35, tags: ["Sweets", "Snacks", "Chaats"] },
+    { name: "Blue Lagoon Lounge", cuisine: "Continental / Bar", location: "Rooftop Heights", rating: 4.5, budget: "High", description: "Trendy rooftop lounge offering cocktails and global finger food.", openTime: "04:00 PM", closeTime: "12:00 AM", minimumVisitDuration: 60, recommendedVisitDuration: 120, tags: ["Rooftop", "Drinks", "Nightlife"] }
   ],
   restStops: [
-    { name: "Expressway Rest Area", type: "Rest Stop", location: "Highway Mile 50", facilities: ["Washrooms", "Quick snacks", "Parking"] }
+    { name: "Expressway Rest Area", type: "Rest Stop", location: "Highway Mile 50", facilities: ["Washrooms", "Quick snacks", "Parking"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 25, tags: ["Rest Stop", "24/7", "Washrooms"] },
+    { name: "Highway Food Plaza", type: "Food Stop", location: "Highway Mile 80", facilities: ["Restrooms", "Multiple Restaurants", "Fuel Station"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 40, tags: ["Food Court", "Restrooms", "24/7"] },
+    { name: "Green Canopy Cafe Stop", type: "Cafe", location: "Highway Exit 12", facilities: ["Clean Washrooms", "Garden Seating", "Organic Tea"], openTime: "07:00 AM", closeTime: "09:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Cafe", "Tea", "Washrooms"] },
+    { name: "Star Highway Lounge", type: "Premium Stop", location: "Highway Mile 30", facilities: ["AC Lounge", "Washrooms", "Ather EV Charger"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Premium Lounge", "AC", "EV Charging"] },
+    { name: "Refresh & Fuel Hub", type: "Rest Stop", location: "Highway Junction 4", facilities: ["Washrooms", "Sacks & Beverages", "Car Wash"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 25, tags: ["Fuel", "Snacks", "Car Wash"] },
+    { name: "Highway Chai Point", type: "Snack Stop", location: "Highway Mile 100", facilities: ["Washrooms", "Tea & Snacks", "Outdoor benches"], openTime: "06:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Tea", "Snacks", "Restrooms"] },
+    { name: "Munch & Go", type: "Convenience Stop", location: "Highway Mile 65", facilities: ["Clean Restrooms", "Fast Food", "ATM"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Snacks", "Restrooms", "ATM"] },
+    { name: "Milestone Food Court", type: "Food Stop", location: "Highway Mile 120", facilities: ["Premium Washrooms", "Food Court", "Kids Play Area"], openTime: "07:00 AM", closeTime: "10:30 PM", minimumVisitDuration: 25, recommendedVisitDuration: 45, tags: ["Food Court", "Kids Play", "Washrooms"] },
+    { name: "Truckers Oasis", type: "Rest Stop", location: "Highway Mile 15", facilities: ["Restrooms", "Dhaba Food", "Dormitory"], openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["24/7", "Dhaba", "Truck Rest"] },
+    { name: "Traveler's Pitstop", type: "Rest Stop", location: "Highway Mile 140", facilities: ["Restrooms", "Coffee Counter", "Park Seating"], openTime: "06:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Coffee", "Restrooms", "Relax"] }
   ],
   haltingPlaces: [
-    { name: "Guardian Inn Hotel", type: "Hotel", rating: 4.2, pricePerNight: "₹4,500/night" }
+    { name: "Guardian Inn Hotel", type: "Hotel", rating: 4.2, pricePerNight: "₹4,500/night", location: "City Center Boulevard", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Hotel", "Comfort", "Business"] },
+    { name: "Grand Vista Resort", type: "Resort", rating: 4.6, pricePerNight: "₹8,500/night", location: "Scenic Valleys", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Resort", "Luxury", "Spa"] },
+    { name: "Traveler's Cozy Lodge", type: "Lodge", rating: 3.9, pricePerNight: "₹2,200/night", location: "Near Railway Station", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Budget", "Lodge", "Location"] },
+    { name: "The Emerald Suites", type: "Premium", rating: 4.4, pricePerNight: "₹6,000/night", location: "Business District", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Suites", "Modern", "Business"] },
+    { name: "Heritage Haveli", type: "Heritage", rating: 4.5, pricePerNight: "₹7,000/night", location: "Historic Quarter", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Heritage", "Boutique", "Culture"] },
+    { name: "Riverside Cabins", type: "Nature Resort", rating: 4.3, pricePerNight: "₹5,000/night", location: "River Bank Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Cabins", "Nature", "Quiet"] },
+    { name: "Transit Palace Hotel", type: "Hotel", rating: 4.1, pricePerNight: "₹3,500/night", location: "Expressway Exit 8", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Transit", "Highway", "Clean"] },
+    { name: "Pinewood Homestay", type: "Homestay", rating: 4.5, pricePerNight: "₹2,800/night", location: "Woodland Avenue", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Homestay", "Family Run", "Cozy"] },
+    { name: "Golden Oasis Villas", type: "Luxury", rating: 4.7, pricePerNight: "₹12,500/night", location: "Lake View Heights", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Luxury", "Villas", "Private Pool"] },
+    { name: "Backpackers Central Dome", type: "Hostel", rating: 4.2, pricePerNight: "₹1,200/night", location: "Downtown Center", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 360, recommendedVisitDuration: 720, tags: ["Hostel", "Budget", "Social"] }
   ],
   fuelChargingStops: [
-    { name: "National Highway Charging Point", type: "EV", status: "Active", location: "Exit 15" },
-    { name: "IOCL Petrol Pump", type: "Fuel", status: "Active", location: "Exit 16" }
+    { name: "National Highway Charging Point", type: "EV", status: "Active", location: "Exit 15", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Fast Charger", "NH", "24/7"] },
+    { name: "IOCL Petrol Pump", type: "Fuel", status: "Active", location: "Exit 16", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "IOCL", "24/7"] },
+    { name: "Super EV Charge Center", type: "EV", status: "Active", location: "Highway Mile 45", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Super Charger", "24/7"] },
+    { name: "BPCL Petrol Pump & EV", type: "Fuel", status: "Active", location: "Highway Mile 90", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["Fuel", "EV", "BPCL", "Dual Station"] },
+    { name: "City EV Grid Hub", type: "EV", status: "Active", location: "Central Metro Mall", openTime: "08:00 AM", closeTime: "10:00 PM", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Mall Location", "Grid Hub"] },
+    { name: "HP Fuel Station - Bypass", type: "Fuel", status: "Active", location: "Bypass Ring Road", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "HPCL", "Bypass"] },
+    { name: "Voltaic EV Charging Station", type: "EV", status: "Active", location: "Guardian Inn Parking", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Hotel Parking", "24/7"] },
+    { name: "Reliance Petrol Pump", type: "Fuel", status: "Active", location: "West Highway Main", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 10, recommendedVisitDuration: 20, tags: ["Fuel", "Reliance", "Diesel"] },
+    { name: "Ather Grid Charger Hub", type: "EV", status: "Active", location: "Central Market Complex", openTime: "07:00 AM", closeTime: "11:00 PM", minimumVisitDuration: 15, recommendedVisitDuration: 30, tags: ["EV", "Ather Grid", "Two-wheeler"] },
+    { name: "Expressway Eco Charger", type: "EV", status: "Active", location: "Hassan Expressway Exit 3", openTime: "24 hours", closeTime: "24 hours", minimumVisitDuration: 20, recommendedVisitDuration: 45, tags: ["EV", "Expressway", "Eco Charge"] }
   ]
 };

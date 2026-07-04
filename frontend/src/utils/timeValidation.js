@@ -157,52 +157,225 @@ export function validateTripStart(date, time) {
 
 // Static places database for instant client-side lookup
 export const PLACE_SPECS_DB = {
-  // Attractions
-  "mysore palace": { open: "10:00 AM", close: "05:30 PM", duration: 90, type: "attraction" },
-  "chamundi hill temple": { open: "07:30 AM", close: "09:00 PM", duration: 60, type: "attraction" },
-  "brindavan gardens": { open: "06:00 AM", close: "08:00 PM", duration: 90, type: "attraction", bestTime: "evening" },
-  "karanji lake": { open: "08:30 AM", close: "05:30 PM", duration: 60, type: "attraction" },
-  "abbey falls": { open: "09:00 AM", close: "05:00 PM", duration: 60, type: "attraction" },
-  "raja's seat": { open: "06:00 AM", close: "08:00 PM", duration: 60, type: "attraction", bestTime: "evening" },
-  "namdroling golden temple": { open: "09:00 AM", close: "06:00 PM", duration: 90, type: "attraction" },
-  "lalbagh botanical garden": { open: "06:00 AM", close: "07:00 PM", duration: 90, type: "attraction" },
-  "bangalore palace": { open: "10:00 AM", close: "05:30 PM", duration: 90, type: "attraction" },
-  "nandi hills": { open: "06:00 AM", close: "06:00 PM", duration: 120, type: "attraction" },
-  "mullayanagiri peak": { open: "06:00 AM", close: "06:00 PM", duration: 90, type: "attraction" },
-  "hebbe falls": { open: "08:00 AM", close: "04:00 PM", duration: 120, type: "attraction" },
-  "baba budangiri": { open: "08:00 AM", close: "05:00 PM", duration: 90, type: "attraction" },
-  "ooty botanical gardens": { open: "07:00 AM", close: "06:30 PM", duration: 90, type: "attraction" },
-  "doddabetta peak": { open: "09:00 AM", close: "06:00 PM", duration: 60, type: "attraction" },
-  "ooty lake": { open: "09:00 AM", close: "06:00 PM", duration: 90, type: "attraction" },
+  // Mysore Attractions
+  "mysore palace": { open: "10:00 AM", close: "05:30 PM", duration: 120, minDuration: 60, type: "attraction" },
+  "chamundi hill temple": { open: "07:30 AM", close: "09:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "brindavan gardens": { open: "06:00 AM", close: "08:00 PM", duration: 120, minDuration: 60, type: "attraction", bestTime: "evening" },
+  "karanji lake": { open: "08:30 AM", close: "05:30 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "mysore zoo": { open: "08:30 AM", close: "05:30 PM", duration: 180, minDuration: 90, type: "attraction" },
+  "jaganmohan palace art gallery": { open: "10:00 AM", close: "05:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "st. philomena's church": { open: "08:00 AM", close: "06:00 PM", duration: 60, minDuration: 30, type: "attraction" },
+  "railway museum": { open: "09:30 AM", close: "05:30 PM", duration: 75, minDuration: 45, type: "attraction" },
+  "grs fantasy park": { open: "10:30 AM", close: "06:00 PM", duration: 240, minDuration: 120, type: "attraction" },
+  "lalitha mahal palace": { open: "10:00 AM", close: "06:00 PM", duration: 90, minDuration: 45, type: "attraction" },
 
-  // Restaurants
-  "hotel mylari": { open: "07:00 AM", close: "10:00 PM", duration: 45, type: "restaurant" },
-  "gufha restaurant": { open: "12:00 PM", close: "11:00 PM", duration: 60, type: "restaurant" },
-  "the olive garden": { open: "11:00 AM", close: "10:30 PM", duration: 60, type: "restaurant" },
-  "coorg cuisine": { open: "12:00 PM", close: "10:00 PM", duration: 50, type: "restaurant" },
-  "raintree restaurant": { open: "12:00 PM", close: "10:30 PM", duration: 60, type: "restaurant" },
-  "east end hotel": { open: "11:30 AM", close: "10:00 PM", duration: 45, type: "restaurant" },
-  "vidyarthi bhavan": { open: "06:30 AM", close: "11:30 AM", duration: 45, type: "restaurant" },
-  "toit brewpub": { open: "12:00 PM", close: "11:30 PM", duration: 90, type: "restaurant" },
-  "nagarjuna restaurant": { open: "12:00 PM", close: "04:00 PM", duration: 60, type: "restaurant" },
-  "town house restaurant": { open: "07:00 AM", close: "10:00 PM", duration: 45, type: "restaurant" },
-  "the peeriot": { open: "11:00 AM", close: "10:30 PM", duration: 60, type: "restaurant" },
-  "odyssey restaurant": { open: "12:00 PM", close: "10:30 PM", duration: 60, type: "restaurant" },
-  "shinkows chinese restaurant": { open: "11:30 AM", close: "10:00 PM", duration: 60, type: "restaurant" },
-  "place to bee": { open: "11:00 AM", close: "09:30 PM", duration: 50, type: "restaurant" },
-  "earl's secret": { open: "12:00 PM", close: "10:00 PM", duration: 75, type: "restaurant" },
+  // Mysore Restaurants
+  "hotel mylari": { open: "07:00 AM", close: "10:00 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "gufha restaurant": { open: "12:00 PM", close: "11:00 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "the olive garden": { open: "11:00 AM", close: "10:30 PM", duration: 90, minDuration: 45, type: "restaurant" },
+  "oyster bay": { open: "11:30 AM", close: "11:00 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "mahesh prasad": { open: "07:00 AM", close: "09:30 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "parklane hotel restaurant": { open: "11:00 AM", close: "11:30 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "sizzler bistro": { open: "12:00 PM", close: "10:30 PM", duration: 60, minDuration: 40, type: "restaurant" },
+  "spring at radisson blu": { open: "06:30 AM", close: "11:30 PM", duration: 90, minDuration: 60, type: "restaurant" },
+  "poojari's fish land": { open: "11:30 AM", close: "10:30 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "depth n green": { open: "08:00 AM", close: "08:30 PM", duration: 60, minDuration: 30, type: "restaurant" },
 
-  // Rest Stops
-  "highway nest food plaza": { open: "07:00 AM", close: "11:00 PM", duration: 30, type: "restStop" },
-  "cafe coffee day - highway stop": { open: "24 hours", duration: 30, type: "restStop" },
-  "coorg spices hub & cafe": { open: "08:00 AM", close: "08:00 PM", duration: 45, type: "restStop" },
-  "cafe coffee day": { open: "24 hours", duration: 30, type: "restStop" },
-  "shell select lounge": { open: "24 hours", duration: 20, type: "restStop" },
-  "a2b adyar ananda bhavan": { open: "06:30 AM", close: "10:30 PM", duration: 35, type: "restStop" },
-  "ccd - global village road": { open: "07:00 AM", close: "11:00 PM", duration: 30, type: "restStop" },
-  "hassan highway food plaza": { open: "06:00 AM", close: "11:00 PM", duration: 35, type: "restStop" },
-  "hill view tea stop": { open: "07:00 AM", close: "07:00 PM", duration: 25, type: "restStop" },
-  "nilgiri highway nest": { open: "06:00 AM", close: "10:00 PM", duration: 30, type: "restStop" }
+  // Mysore Rest Stops
+  "highway nest food plaza": { open: "07:00 AM", close: "11:00 PM", duration: 45, minDuration: 20, type: "restStop" },
+  "cafe coffee day - highway stop": { open: "24 hours", duration: 30, minDuration: 15, type: "restStop" },
+  "kamath lokaruchi": { open: "06:00 AM", close: "10:00 PM", duration: 60, minDuration: 30, type: "restStop" },
+  "empire restaurant - expressway halt": { open: "24 hours", duration: 45, minDuration: 30, type: "restStop" },
+  "maddur tiffany's": { open: "06:30 AM", close: "09:30 PM", duration: 35, minDuration: 20, type: "restStop" },
+  "shell select fuel & convenience": { open: "24 hours", duration: 25, minDuration: 10, type: "restStop" },
+  "shivalli restaurant stop": { open: "07:00 AM", close: "10:30 PM", duration: 45, minDuration: 25, type: "restStop" },
+  "adyar ananda bhavan (a2b) - ramanagara": { open: "06:30 AM", close: "10:30 PM", duration: 45, minDuration: 25, type: "restStop" },
+  "polar bear ice cream sundaes": { open: "11:00 AM", close: "11:00 PM", duration: 40, minDuration: 20, type: "restStop" },
+  "highway chai point": { open: "06:00 AM", close: "11:00 PM", duration: 30, minDuration: 15, type: "restStop" },
+
+  // Mysore Lodging
+  "the windflower resort & spa": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "radisson blu plaza hotel": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "grand mercure mysore": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "silent shores resort & spa": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "fortune jp palace": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "southern star mysore": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "roost guesthouse": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "country inn & suites by radisson": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "ginger mysore": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "lalitha mahal palace hotel": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+
+  // Mysore Fuel / EV Charging
+  "tata power ev fast charger": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "hp cl petrol pump - mysore road": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "zeon ev charging station - mall of mysore": { open: "10:00 AM", close: "10:00 PM", duration: 45, minDuration: 20, type: "refuel" },
+  "jio-bp pulse ev station": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "shell fuel station - ring road": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "indian oil petrol pump - city center": { open: "06:00 AM", close: "11:30 PM", duration: 15, minDuration: 5, type: "refuel" },
+  "bharat petroleum fast ev station": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "ather grid fast charger - gokulam": { open: "08:00 AM", close: "10:00 PM", duration: 30, minDuration: 15, type: "refuel" },
+  "nayara energy fuel station": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "relux ev charging hub": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+
+  // Coorg
+  "abbey falls": { open: "09:00 AM", close: "05:00 PM", duration: 60, minDuration: 45, type: "attraction" },
+  "raja's seat": { open: "06:00 AM", close: "08:00 PM", duration: 60, minDuration: 30, type: "attraction", bestTime: "evening" },
+  "namdroling golden temple": { open: "09:00 AM", close: "06:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "coorg cuisine": { open: "12:00 PM", close: "10:00 PM", duration: 50, minDuration: 30, type: "restaurant" },
+  "raintree restaurant": { open: "12:00 PM", close: "10:30 PM", duration: 60, minDuration: 45, type: "restaurant" },
+  "east end hotel": { open: "11:30 AM", close: "10:00 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "coorg spices hub & cafe": { open: "08:00 AM", close: "08:00 PM", duration: 45, minDuration: 20, type: "restStop" },
+  "cafe coffee day": { open: "24 hours", duration: 30, minDuration: 15, type: "restStop" },
+  "the tamara coorg": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "club mahindra madikeri": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "zeon ev charging station": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "indian oil petrol station": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+
+  // Bangalore
+  "lalbagh botanical garden": { open: "06:00 AM", close: "07:00 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "bangalore palace": { open: "10:00 AM", close: "05:30 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "nandi hills": { open: "06:00 AM", close: "06:00 PM", duration: 120, minDuration: 90, type: "attraction", bestTime: "morning" },
+  "vidyarthi bhavan": { open: "06:30 AM", close: "11:30 AM", duration: 45, minDuration: 30, type: "restaurant" },
+  "toit brewpub": { open: "12:00 PM", close: "11:30 PM", duration: 90, minDuration: 60, type: "restaurant" },
+  "nagarjuna restaurant": { open: "12:00 PM", close: "04:00 PM", duration: 60, minDuration: 40, type: "restaurant" },
+  "shell select lounge": { open: "24 hours", duration: 20, minDuration: 10, type: "restStop" },
+  "a2b adyar ananda bhavan": { open: "06:30 AM", close: "10:30 PM", duration: 35, minDuration: 20, type: "restStop" },
+  "taj west end": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "itc gardenia": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "bescom fast ev charger": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "shell fuel station - indiranagar": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+
+  // Chikkamagaluru
+  "mullayanagiri peak": { open: "06:00 AM", close: "06:00 PM", duration: 90, minDuration: 60, type: "attraction", bestTime: "morning" },
+  "hebbe falls": { open: "08:00 AM", close: "04:00 PM", duration: 120, minDuration: 90, type: "attraction" },
+  "baba budangiri": { open: "08:00 AM", close: "05:00 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "town house restaurant": { open: "07:00 AM", close: "10:00 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "the peeriot": { open: "11:00 AM", close: "10:30 PM", duration: 60, minDuration: 45, type: "restaurant" },
+  "odyssey restaurant": { open: "12:00 PM", close: "10:30 PM", duration: 60, minDuration: 45, type: "restaurant" },
+  "ccd - global village road": { open: "07:00 AM", close: "11:00 PM", duration: 30, minDuration: 20, type: "restStop" },
+  "hassan highway food plaza": { open: "06:00 AM", close: "11:00 PM", duration: 35, minDuration: 25, type: "restStop" },
+  "the serai chikkamagaluru": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "trivik hotels & resorts": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "ather grid ev charger": { open: "24 hours", duration: 30, minDuration: 15, type: "refuel" },
+  "hp petrol pump": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+
+  // Ooty
+  "ooty botanical gardens": { open: "07:00 AM", close: "06:30 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "doddabetta peak": { open: "09:00 AM", close: "06:00 PM", duration: 60, minDuration: 45, type: "attraction" },
+  "ooty lake": { open: "09:00 AM", close: "06:00 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "shinkows chinese restaurant": { open: "11:30 AM", close: "10:00 PM", duration: 60, minDuration: 45, type: "restaurant" },
+  "place to bee": { open: "11:00 AM", close: "09:30 PM", duration: 50, minDuration: 40, type: "restaurant" },
+  "earl's secret": { open: "12:00 PM", close: "10:00 PM", duration: 75, minDuration: 60, type: "restaurant" },
+  "hill view tea stop": { open: "07:00 AM", close: "07:00 PM", duration: 25, minDuration: 15, type: "restStop" },
+  "nilgiri highway nest": { open: "06:00 AM", close: "10:00 PM", duration: 30, minDuration: 20, type: "restStop" },
+  "savoy - ihcl seleqtions": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "destiny the farmstay": { open: "24 hours", duration: 480, minDuration: 360, type: "lodging" },
+  "tata power fast ev charger": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "bharat petroleum pump": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+
+  // Chennai Attractions
+  "marina beach": { open: "24 hours", duration: 90, minDuration: 45, type: "attraction" },
+  "kapaleeshwarar temple": { open: "06:00 AM", close: "09:00 PM", duration: 60, minDuration: 30, type: "attraction" },
+  "fort st. george": { open: "09:00 AM", close: "05:00 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "government museum chennai": { open: "09:30 AM", close: "05:00 PM", duration: 120, minDuration: 60, type: "attraction" },
+  "santhome basilica": { open: "06:00 AM", close: "09:00 PM", duration: 60, minDuration: 30, type: "attraction" },
+  "valluvar kottam": { open: "08:30 AM", close: "05:30 PM", duration: 60, minDuration: 30, type: "attraction" },
+  "guindy national park": { open: "09:00 AM", close: "05:30 PM", duration: 120, minDuration: 60, type: "attraction" },
+  "besant nagar beach": { open: "24 hours", duration: 90, minDuration: 45, type: "attraction" },
+  "dakshinachitra": { open: "10:00 AM", close: "06:00 PM", duration: 180, minDuration: 90, type: "attraction" },
+  "arignar anna zoological park": { open: "09:00 AM", close: "05:00 PM", duration: 240, minDuration: 120, type: "attraction" },
+
+  // Chennai Restaurants
+  "murugan idli shop": { open: "07:00 AM", close: "11:00 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "ratna cafe": { open: "06:30 AM", close: "10:30 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "mathsya": { open: "07:00 AM", close: "11:30 PM", duration: 60, minDuration: 30, type: "restaurant" },
+  "sangeetha veg restaurant": { open: "06:30 AM", close: "10:30 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "annalakshmi": { open: "12:00 PM", close: "09:30 PM", duration: 90, minDuration: 60, type: "restaurant" },
+  "southern spice": { open: "12:30 PM", close: "11:30 PM", duration: 90, minDuration: 60, type: "restaurant" },
+  "ponnusamy hotel": { open: "11:30 AM", close: "11:00 PM", duration: 60, minDuration: 40, type: "restaurant" },
+  "the marina": { open: "12:00 PM", close: "11:00 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "buhari": { open: "11:00 AM", close: "11:30 PM", duration: 60, minDuration: 40, type: "restaurant" },
+  "adyar ananda bhavan": { open: "06:30 AM", close: "10:30 PM", duration: 45, minDuration: 25, type: "restaurant" },
+
+  // Chennai Rest Stops
+  "cafe coffee day": { open: "24 hours", duration: 30, minDuration: 15, type: "restStop" },
+  "writer’s cafe": { open: "09:00 AM", close: "10:00 PM", duration: 45, minDuration: 20, type: "restStop" },
+  "amethyst cafe": { open: "07:30 AM", close: "11:00 PM", duration: 60, minDuration: 30, type: "restStop" },
+  "sandy’s chocolate laboratory": { open: "11:00 AM", close: "11:00 PM", duration: 45, minDuration: 25, type: "restStop" },
+  "a2b highway stop": { open: "06:00 AM", close: "11:00 PM", duration: 40, minDuration: 20, type: "restStop" },
+
+  // Chennai Lodging
+  "taj coromandel": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "itc grand chola": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "radisson blu chennai": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "the park chennai": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "hyatt regency chennai": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "ginger chennai": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "fabhotel options": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+
+  // Chennai EV/Fuel
+  "tata power ev charging": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "statiq ev charging": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "ather grid chennai": { open: "08:00 AM", close: "10:00 PM", duration: 30, minDuration: 15, type: "refuel" },
+  "indianoil": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "bharat petroleum": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "hp petrol pump": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+
+  // General/Default Destination
+  "scenic city viewpoint": { open: "06:00 AM", close: "09:00 PM", duration: 60, minDuration: 30, type: "attraction" },
+  "public historic park": { open: "06:00 AM", close: "08:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "central science museum": { open: "10:00 AM", close: "05:00 PM", duration: 120, minDuration: 60, type: "attraction" },
+  "national art gallery": { open: "10:00 AM", close: "05:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "botanical conservatory": { open: "09:00 AM", close: "06:00 PM", duration: 75, minDuration: 45, type: "attraction" },
+  "sunset hill fort": { open: "06:00 AM", close: "07:00 PM", duration: 120, minDuration: 60, type: "attraction" },
+  "crafts village bazaar": { open: "11:00 AM", close: "08:00 PM", duration: 90, minDuration: 45, type: "attraction" },
+  "aquarium world": { open: "09:30 AM", close: "06:00 PM", duration: 90, minDuration: 60, type: "attraction" },
+  "war memorial arch": { open: "24 hours", duration: 30, minDuration: 15, type: "attraction" },
+  "amusement pier": { open: "12:00 PM", close: "10:00 PM", duration: 180, minDuration: 90, type: "attraction" },
+
+  "highway diner": { open: "24 hours", duration: 45, minDuration: 30, type: "restaurant" },
+  "central veg plaza": { open: "07:00 AM", close: "10:00 PM", duration: 45, minDuration: 30, type: "restaurant" },
+  "royal tandoori house": { open: "12:00 PM", close: "11:00 PM", duration: 60, minDuration: 40, type: "restaurant" },
+  "cafe bistro": { open: "10:00 AM", close: "10:00 PM", duration: 60, minDuration: 30, type: "restaurant" },
+  "spice route seafood": { open: "12:00 PM", close: "11:00 PM", duration: 75, minDuration: 45, type: "restaurant" },
+  "noodle wok": { open: "11:00 AM", close: "10:00 PM", duration: 35, minDuration: 20, type: "restaurant" },
+  "green leaf organics": { open: "08:00 AM", close: "09:00 PM", duration: 50, minDuration: 30, type: "restaurant" },
+  "the steakhouse": { open: "05:00 PM", close: "11:30 PM", duration: 90, minDuration: 60, type: "restaurant" },
+  "local sweet house": { open: "08:00 AM", close: "09:30 PM", duration: 35, minDuration: 20, type: "restaurant" },
+  "blue lagoon lounge": { open: "04:00 PM", close: "12:00 AM", duration: 120, minDuration: 60, type: "restaurant" },
+
+  "expressway rest area": { open: "24 hours", duration: 25, minDuration: 10, type: "restStop" },
+  "highway food plaza": { open: "24 hours", duration: 40, minDuration: 20, type: "restStop" },
+  "green canopy cafe stop": { open: "07:00 AM", close: "09:00 PM", duration: 30, minDuration: 15, type: "restStop" },
+  "star highway lounge": { open: "24 hours", duration: 30, minDuration: 15, type: "restStop" },
+  "refresh & fuel hub": { open: "24 hours", duration: 25, minDuration: 10, type: "restStop" },
+  "highway chai point": { open: "06:00 AM", close: "11:00 PM", duration: 30, minDuration: 15, type: "restStop" },
+  "munch & go": { open: "24 hours", duration: 30, minDuration: 15, type: "restStop" },
+  "milestone food court": { open: "07:00 AM", close: "10:30 PM", duration: 45, minDuration: 25, type: "restStop" },
+  "truckers oasis": { open: "24 hours", duration: 45, minDuration: 20, type: "restStop" },
+  "traveler's pitstop": { open: "06:00 AM", close: "10:00 PM", duration: 30, minDuration: 15, type: "restStop" },
+
+  "guardian inn hotel": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "grand vista resort": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "traveler's cozy lodge": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "the emerald suites": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "heritage haveli": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "riverside cabins": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "transit palace hotel": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "pinewood homestay": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "golden oasis villas": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+  "backpackers central dome": { open: "24 hours", duration: 720, minDuration: 360, type: "lodging" },
+
+  "national highway charging point": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "iocl petrol pump": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "super ev charge center": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "bpcl petrol pump & ev": { open: "24 hours", duration: 30, minDuration: 15, type: "refuel" },
+  "city ev grid hub": { open: "08:00 AM", close: "10:00 PM", duration: 45, minDuration: 20, type: "refuel" },
+  "hp fuel station - bypass": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "voltaic ev charging station": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" },
+  "reliance petrol pump": { open: "24 hours", duration: 20, minDuration: 10, type: "refuel" },
+  "ather grid charger hub": { open: "07:00 AM", close: "11:00 PM", duration: 30, minDuration: 15, type: "refuel" },
+  "expressway eco charger": { open: "24 hours", duration: 45, minDuration: 20, type: "refuel" }
 };
 
 // Retrieve details for local specs or resolve dynamically
@@ -268,18 +441,39 @@ export function getEarliestArrival(previousWaypoint, travelTimeMinutes) {
   return addMinutes(prevEndTime, travelTimeMinutes);
 }
 
-// Check if a place is open at arrival time and stays open throughout duration
-export function isPlaceOpen(placeName, arrivalTime, durationMinutes) {
+export function getLocalPlaceTimeStatus(placeName, arrivalTime) {
   const specs = getLocalSpecs(placeName);
-  if (specs.open === "24 hours") return true;
+  const openTime = specs.open || specs.openTime;
+  const closeTime = specs.close || specs.closeTime;
+  const minDur = specs.minDuration || specs.minimumVisitDuration || 60;
+  const recDur = specs.duration || specs.recommendedVisitDuration || 90;
+
+  if (openTime === "24 hours" || openTime === "24 Hours" || !closeTime) {
+    return "OPEN";
+  }
 
   const arrivalMins = timeToMinutes(arrivalTime);
-  const departureMins = arrivalMins + durationMinutes;
+  const openMins = timeToMinutes(openTime);
+  const closeMins = timeToMinutes(closeTime);
 
-  const openMins = timeToMinutes(specs.open);
-  const closeMins = timeToMinutes(specs.close);
+  if (arrivalMins < openMins || arrivalMins >= closeMins) {
+    return "CLOSED";
+  }
 
-  return arrivalMins >= openMins && departureMins <= closeMins;
+  const availableMins = closeMins - arrivalMins;
+  if (availableMins < minDur) {
+    return "NOT ENOUGH TIME";
+  }
+  if (availableMins < recDur) {
+    return "LIMITED";
+  }
+  return "OPEN";
+}
+
+// Check if a place is open at arrival time and stays open throughout duration
+export function isPlaceOpen(placeName, arrivalTime, durationMinutes) {
+  const status = getLocalPlaceTimeStatus(placeName, arrivalTime);
+  return status === "OPEN" || status === "LIMITED";
 }
 
 // Check if a waypoint time is valid in context
@@ -337,15 +531,27 @@ export function validateWaypointTime(waypoint, previousWaypoint, nextWaypoint, t
 
   // 5. Check opening hours (skip if it is the starting city, i.e., previousWaypoint is null)
   if (previousWaypoint !== null && previousWaypoint !== undefined) {
-    const specs = getLocalSpecs(waypoint.place);
-    const duration = specs.duration !== undefined ? specs.duration : 60;
-    const openVal = isPlaceOpen(waypoint.place, arrivalTime, duration);
-    if (!openVal) {
-      return {
-        valid: false,
-        reason: "PLACE_CLOSED",
-        message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${specs.open} - ${specs.close}.`
-      };
+    const status = getLocalPlaceTimeStatus(waypoint.place, arrivalTime);
+    if (status === "CLOSED" || status === "NOT ENOUGH TIME") {
+      const specs = getLocalSpecs(waypoint.place);
+      const openTime = specs.open || specs.openTime || "09:00 AM";
+      const closeTime = specs.close || specs.closeTime || "06:00 PM";
+      const minDur = specs.minDuration || specs.minimumVisitDuration || 60;
+      if (status === "CLOSED") {
+        return {
+          valid: false,
+          reason: "PLACE_CLOSED",
+          message: `${waypoint.place} is closed at ${arrivalTime}. Opening hours: ${openTime} - ${closeTime}.`
+        };
+      } else {
+        const closeMins = timeToMinutes(closeTime);
+        const availableMins = closeMins - arrivalMins;
+        return {
+          valid: false,
+          reason: "NOT_ENOUGH_TIME",
+          message: `${waypoint.place} does not have enough visit time at ${arrivalTime}. Minimum required: ${minDur} mins, available: ${availableMins} mins.`
+        };
+      }
     }
   }
 
@@ -359,7 +565,8 @@ export function getValidationMessage(reason) {
     "PAST_TIME": "Fix 1 issue: Start time cannot be earlier than the current time.",
     "TRAVEL_TIME_CONFLICT": "Travel time conflict: waypoints must account for transit offsets.",
     "OVERLAP_NEXT": "Timing overlap with the following stop.",
-    "PLACE_CLOSED": "Target destination is closed at selected timing."
+    "PLACE_CLOSED": "Target destination is closed at selected timing.",
+    "NOT_ENOUGH_TIME": "Not enough visit time remaining before closing."
   };
   return messages[reason] || "Schedule validation conflict.";
 }

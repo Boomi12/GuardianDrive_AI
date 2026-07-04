@@ -7,6 +7,9 @@ export function evaluateAgents(twinState, itinerary) {
   const destKey = destination.toLowerCase().trim();
   const destData = mockDestinations[destKey] || defaultMockDestination;
 
+  const weatherDesc = itinerary?.weatherData?.description || journeyTwin.weather || 'clear';
+  const weatherCond = journeyTwin.weather?.toLowerCase() || 'clear';
+
   // 1. Safety Agent
   let safetyStatus = 'Optimal';
   let safetyRec = 'Driver alert level is nominal. Safe driving habits maintained.';
@@ -24,6 +27,14 @@ export function evaluateAgents(twinState, itinerary) {
     safetyStatus = 'Caution';
     safetyRec = 'Continuous driving exceeds 3 hours. Recommending a brief stretch break at the next toll depot.';
     safetyConfidence = 85;
+  } else if (weatherCond === 'thunderstorm') {
+    safetyStatus = 'Warning';
+    safetyRec = `Severe weather warning: ${weatherDesc} active. Recommending immediate halt or low speed safety offsets (max 40 km/h) to avoid hydroplaning.`;
+    safetyConfidence = 95;
+  } else if (['rain', 'fog', 'snow'].includes(weatherCond)) {
+    safetyStatus = 'Caution';
+    safetyRec = `Adverse weather (${weatherDesc}) detected. Maintain lower speeds, keep safe distance, and consider taking regular rest stops.`;
+    safetyConfidence = 90;
   }
 
   // 2. Route Agent
@@ -35,9 +46,13 @@ export function evaluateAgents(twinState, itinerary) {
     routeStatus = 'Alert';
     routeRec = 'Heavy traffic congestion ahead. Recalculated alternative bypass route to save 18 minutes of transit.';
     routeConfidence = 92;
-  } else if (journeyTwin.weather === 'rain' || journeyTwin.weather === 'fog' || journeyTwin.weather === 'snow') {
+  } else if (weatherCond === 'thunderstorm') {
+    routeStatus = 'Critical';
+    routeRec = `Extreme routing alert: ${weatherDesc} detected. Recommended routing avoids open expressways and low-lying flood regions.`;
+    routeConfidence = 98;
+  } else if (['rain', 'fog', 'snow'].includes(weatherCond)) {
     routeStatus = 'Caution';
-    routeRec = `Adverse weather (${journeyTwin.weather}) detected. Activating low-speed route options avoiding steep slopes and slip hazards.`;
+    routeRec = `Adverse weather: ${weatherDesc} detected. Activating safety-first route options avoiding high slip hazards and steep gradients.`;
     routeConfidence = 89;
   }
 
